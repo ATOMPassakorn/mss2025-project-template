@@ -206,7 +206,7 @@
         <div class="w-full lg:w-[350px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
             <div class="text-center py-3 border-b text-xs text-gray-500 font-medium uppercase tracking-wide">ITKMITL Internet Authentication</div>
             <div class="bg-gray-100 p-6 border-b">
-                <h1 class="text-lg text-gray-600">อรุณสวัสดิ์</h1>
+                <h1 id="greetingText" class="text-lg text-gray-600"></h1>
                 <h2 id="userName" class="text-2xl font-bold text-gray-800 mt-1 leading-tight">...</h2>
                 <p id="userEmail" class="text-gray-500 text-sm mt-2">...</p>
             </div>
@@ -249,6 +249,17 @@
     </div>
 
     <script>
+        const hour = new Date().getHours();
+        let greeting = "สวัสดีครับ"; // Default
+        if (hour >= 5 && hour < 12) {
+            greeting = "อรุณสวัสดิ์";
+        } else if (hour >= 12 && hour < 17) {
+            greeting = "สวัสดีตอนบ่าย";
+        } else {
+            greeting = "สวัสดีตอนเย็น";
+        }
+        document.getElementById('greetingText').innerText = greeting;
+
         // ==============================
         // ส่วนที่ 1: สุ่มรูปภาพพื้นหลัง
         // ==============================
