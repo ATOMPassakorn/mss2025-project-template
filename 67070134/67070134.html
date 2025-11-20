@@ -1,36 +1,168 @@
 <html>
 <head>
+<meta charset="UTF-8">
 <meta http-equiv="refresh" content="60">
+<title>Atom's Server Status - Netscape 4.0 Compatible</title>
+<style>
+  body {
+    background-color: #c0c0c0; /* สีเทา Windows 98 */
+    background-image: url('https://web.archive.org/web/20091027072237/http://geocities.com/Area51/Cavern/5354/stars_bg.gif'); /* ดาววิบวับ (Optional) */
+    color: #000000;
+    font-family: "Times New Roman", Times, serif;
+    margin: 10px;
+  }
+  
+  /* กรอบสไตล์ Windows Window */
+  .window {
+    background-color: #c0c0c0;
+    border: 2px solid #dfdfdf;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    padding: 2px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .title-bar {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: white;
+    padding: 2px 5px;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .content {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Table Layout แบบยุค 2000 */
+  table.stats {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px inset #ffffff;
+    background-color: #ffffff;
+  }
+  
+  td {
+    padding: 5px;
+    border: 1px solid #000000;
+  }
+
+  /* กล่อง Code สไตล์ Terminal เก่า */
+  .terminal-box {
+    background-color: #000000;
+    color: #00ff00;
+    font-family: "Courier New", Courier, monospace;
+    padding: 10px;
+    border: 2px inset #808080;
+    overflow-x: auto;
+    font-size: 12px;
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
+  /* เส้นคั่น 3D */
+  hr.three-d {
+    border: 0;
+    height: 2px;
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    margin: 20px 0;
+  }
+
+  .blink {
+    animation: blinker 1s linear infinite;
+    color: red;
+    font-weight: bold;
+  }
+
+  @keyframes blinker {
+    50% { opacity: 0; }
+  }
+</style>
 </head>
 <body>
-<h1>Server Status: 67070134</h1>
-<p><b>Last Updated:</b> 2025-11-20 12:50:02 UTC</p>
-<p><b>CPU Load:</b> 100.00</p>
-<p><b>Memory Usage:</b> 12.80</p>
-<p><b>Disk Usage:</b> 6.7G/20G</p>
-<p><b>Network RX/TX:</b> 66M / 5.0M</p>
-<h2>Neofetch Info:</h2>
-<pre><pre>atom@passakorn-server 
+
+<div class="window">
+  <div class="title-bar">
+    <span>Server Status: 67070134</span>
+    <span>[X]</span>
+  </div>
+  
+  <div class="content">
+    <center>
+      <h1>Welcome to Atom's Server</h1>
+      <marquee bgcolor="#ffff00" style="border:1px solid black; font-family: Verdana;">
+        *** SYSTEM UPDATE: EVERYTHING IS RUNNING SMOOTHLY *** DON'T FORGET TO SIGN THE GUESTBOOK ***
+      </marquee>
+      <br><br>
+      <p><b>Last Updated:</b> 2025-11-20 13:10:02 UTC</p>
+    </center>
+
+    <hr class="three-d">
+
+    <h3>>> System Resources <<</h3>
+    <table class="stats">
+      <tr>
+        <td bgcolor="#e0e0e0"><b>CPU Load</b></td>
+        <td>
+          <div style="width: 4.80%; background-color: blue; height: 15px; border:1px solid black;"></div>
+          4.80%
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#e0e0e0"><b>Memory Usage</b></td>
+        <td>
+          <div style="width: 14.27%; background-color: green; height: 15px; border:1px solid black;"></div>
+          14.27%
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#e0e0e0"><b>Disk Usage</b></td>
+        <td>6.7G/20G</td>
+      </tr>
+      <tr>
+        <td bgcolor="#e0e0e0"><b>Network (RX/TX)</b></td>
+        <td>69M <span style="color:blue">▼</span> / 5.4M <span style="color:red">▲</span></td>
+      </tr>
+    </table>
+
+    <hr class="three-d">
+
+    <center>
+      <p class="blink">!!! WARNING: TOP PROCESSES BELOW !!!</p>
+    </center>
+
+    <h4>> Neofetch Info:</h4>
+    <div class="terminal-box">
+      <pre>atom@passakorn-server 
 --------------------- 
 OS: Ubuntu 24.04.3 LTS x86_64 
 Host: VMware Virtual Platform None 
 Kernel: 6.8.0-87-generic 
-Uptime: 2 hours, 41 mins 
+Uptime: 3 hours, 1 min 
 Packages: 775 (dpkg) 
 Shell: bash 5.2.21 
 Resolution: 1280x800 
 CPU: Intel Ultra 5 125H (2) @ 2.995GHz 
 GPU: 00:0f.0 VMware SVGA II Adapter 
-Memory: 265MiB / 3868MiB </pre></pre>
-<h2>Top Processes:</h2>
-<pre><pre>top - 12:50:02 up  2:41,  4 users,  load average: 0.00, 0.00, 0.00
-Tasks: 222 total,   1 running, 221 sleeping,   0 stopped,   0 zombie
-%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
-MiB Mem :   3868.0 total,   2718.7 free,    505.1 used,    885.0 buff/cache     
-MiB Swap:   3868.0 total,   3868.0 free,      0.0 used.   3362.9 avail Mem 
+Memory: 320MiB / 3868MiB </pre>
+    </div>
+
+    <h4>> Top Processes:</h4>
+    <div class="terminal-box">
+      <pre>top - 13:10:03 up  3:01,  4 users,  load average: 0.00, 0.00, 0.00
+Tasks: 220 total,   1 running, 219 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  4.5 us,  0.0 sy,  0.0 ni, 95.5 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :   3868.0 total,   2658.6 free,    560.3 used,    890.0 buff/cache     
+MiB Swap:   3868.0 total,   3868.0 free,      0.0 used.   3307.7 avail Mem 
 
     PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
-      1 root      20   0   22520  13264   9296 S   0.0   0.3   0:03.86 systemd
+      1 root      20   0   22520  13264   9296 S   0.0   0.3   0:04.07 systemd
       2 root      20   0       0      0      0 S   0.0   0.0   0:00.02 kthreadd
       3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
       4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
@@ -42,7 +174,16 @@ MiB Swap:   3868.0 total,   3868.0 free,      0.0 used.   3362.9 avail Mem
      12 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
      13 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
      14 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
-     15 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+</pre></pre>
+     15 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+</pre>
+    </div>
+
+    <br>
+    <center>
+      <small>Best viewed with Internet Explorer 5.0 @ 800x600</small><br>
+      <small>&copy; 2000-2025 Atom Corp.</small>
+    </center>
+  </div>
+</div>
+
 </body>
 </html>
-
