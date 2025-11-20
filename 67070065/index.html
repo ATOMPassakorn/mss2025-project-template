@@ -2,65 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>67070065-Monitoring</title>
+  <title>06016413 INTRODUCTION TO NETWORK SYSTEMS 3(3-0-6)</title>
   <link rel="stylesheet" href="./components/styles.css">
 </head>
 <body>
-  <!-- Header Section -->
-  <div class="hero">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="logo-circle"></div>
+      <span class="faculty-text">67070065 server</span>
+    </div>
+    <div class="topbar-right">
+      <button class="home-btn" href="./../index.html">Home</button>
+    </div>
+  </header>
+
+  <!-- Hero banner -->
+  <section class="hero">
+    <!-- ใส่รูปพื้นหลังที่ styles.css (hero::before) -->
     <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Server Monitor Dashboard</h1>
-      <h2>Current Status & Location</h2>
-      <h3 id="lastUpdated"></h3>
+    <div class="hero-text">
+      <div class="hero-title-line1">0601xxxx Server monitoring</div>
+      <div class="hero-title-line2">ภาคการศึกษาที่ 1/2077</div>
+      <div class="hero-title-line3">Part IVXVII — Server Monitoring</div>
     </div>
-  </div>
+  </section>
 
-  <!-- Content Section -->
-  <div class="container">
+  <!-- Main content -->
+  <main class="content">
 
-    <div class="card-grid">
-
-      <!-- CPU -->
-      <div class="card">
-        <h4>CPU Usage</h4>
-        <p class="value" id="cpu">--%</p>
+    <section class="summary-row">
+      <div class="summary-image">
+        <div class="summary-image-inner">
+          <span class="summary-image-text">SERVER STATUS</span>
+        </div>
       </div>
 
-      <!-- Memory -->
-      <div class="card">
-        <h4>Memory Usage</h4>
-        <p class="value" id="memory">--%</p>
+      <div class="summary-col">
+        <h3>CPU Usage</h3>
+        <ul>
+          <li><span id="cpu-main">-- %</span></li>
+          <li class="sub-item">Load summary from <code>top</code></li>
+        </ul>
       </div>
 
-      <!-- Disk -->
-      <div class="card">
-        <h4>Disk Usage</h4>
-        <p class="value" id="disk">--%</p>
-        <span class="sub" id="diskDetail"></span>
+      <div class="summary-col">
+        <h3>Memory Usage</h3>
+        <ul>
+          <li><span id="memory-main">-- %</span></li>
+          <li class="sub-item" id="memory-detail"></li>
+        </ul>
       </div>
 
-    </div>
-
-    <!-- System info -->
-    <div class="card-wide">
-      <h4>System Info (neofetch)</h4>
-      <pre id="neofetch"></pre>
-    </div>
-
-    <!-- Location -->
-    <div class="card-wide">
-      <h4>Server Location</h4>
-      <p id="locationText"></p>
-
-      <div class="map-wrapper">
-        <img src="./world-map.png" alt="World Map" class="world-map">
-        <div id="server-marker" class="map-marker"></div>
+      <div class="summary-col">
+        <h3>Disk Usage</h3>
+        <ul>
+          <li><span id="disk-main">--</span></li>
+          <li class="sub-item" id="disk-detail-main"></li>
+        </ul>
       </div>
-    </div>
+    </section>
 
-  </div>
+    <section class="bottom-row">
+      <div class="bottom-col">
+        <h3>Server Info</h3>
+        <pre id="neofetch"></pre>
+      </div>
+
+      <div class="bottom-col">
+        <h3>Server Process</h3>
+        <div class="top-table-wrapper">
+          <table id="top-table">
+            <thead>
+              <tr>
+                <th>PID</th>
+                <th>User</th>
+                <th>%CPU</th>
+                <th>%MEM</th>
+                <th>Command</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="last-updated">
+          <span id="lastUpdated"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-inner">
+      <p>Server admin: 67070065 Thanabodee Angkuldee</p>
+    </div>
+  </footer>
 
   <script src="./script/script.js"></script>
 </body>
 </html>
+
