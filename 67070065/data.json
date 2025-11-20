@@ -1,14 +1,13 @@
 {
-  "cpu_usage": "16.70",
-  "mem_usage": "18.60",
+  "cpu_usage": "100.00",
+  "mem_usage": "19.23",
   "disk_usage": "27%",
   "disk_used": "4.9G",
   "disk_total": "20G",
-  "iface": "1000",
-  "rx_human": "0",
-  "tx_human": "0",
-  "neofetch": "admin1@67070065-missing-semester \n-------------------------------- \nOS: Ubuntu 24.04.3 LTS x86_64 \nHost: VMware Virtual Platform None \nKernel: 6.8.0-87-generic \nUptime: 16 mins \nPackages: 776 (dpkg) \nShell: bash 5.2.21 \nResolution: 1280x800 \nCPU: Intel i5-8279U (1) @ 2.400GHz \nGPU: 00:0f.0 VMware SVGA II Adapter \nMemory: 208MiB / 1919MiB ",
-  "last_updated": "2025-11-21 02:59:15 +07",
-  "latitude": "13.7540",
-  "longitude": "100.5014"
+  "iface": "ens33",
+  "rx_human": "187K",
+  "tx_human": "203K",
+  "neofetch": "admin1@67070065-missing-semester \n-------------------------------- \nOS: Ubuntu 24.04.3 LTS x86_64 \nHost: VMware Virtual Platform None \nKernel: 6.8.0-87-generic \nUptime: 22 mins \nPackages: 776 (dpkg) \nShell: bash 5.2.21 \nResolution: 1280x800 \nCPU: Intel i5-8279U (1) @ 2.400GHz \nGPU: 00:0f.0 VMware SVGA II Adapter \nMemory: 218MiB / 1919MiB ",
+  "last_updated": "2025-11-21 03:05:21 +07",
+  "top": "top - 03:05:21 up 22 min,  3 users,  load average: 0.12, 0.03, 0.02\nTasks: 200 total,   1 running, 199 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :   1919.8 total,   1450.3 free,    362.3 used,    259.2 buff/cache     \nMiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   1557.5 avail Mem \n\n    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n   2605 admin1    20   0   11932   5504   3456 R   9.1   0.3   0:00.01 top\n      1 root      20   0   22112  13032   9448 S   0.0   0.7   0:01.90 systemd\n      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd\n      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+\n      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+"
 }
