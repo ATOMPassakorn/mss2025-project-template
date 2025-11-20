@@ -1,12 +1,12 @@
 {
-  "cpu_usage": "100.00",
-  "mem_usage": "21.52",
+  "cpu_usage": "9.10",
+  "mem_usage": "21.57",
   "disk_usage": "26%",
   "disk_used": "4.8G",
   "disk_total": "20G",
   "iface": "ens33",
-  "rx_human": "60M",
-  "tx_human": "1.8M",
-  "neofetch": "admin1@67070065-missing-semester \n-------------------------------- \nOS: Ubuntu 24.04.3 LTS x86_64 \nHost: VMware Virtual Platform None \nKernel: 6.8.0-87-generic \nUptime: 3 hours, 28 mins \nPackages: 776 (dpkg) \nShell: bash 5.2.21 \nResolution: 1280x800 \nCPU: Intel i5-8279U (1) @ 2.400GHz \nGPU: 00:0f.0 VMware SVGA II Adapter \nMemory: 237MiB / 1919MiB ",
-  "last_updated": "2025-11-20 19:40:01 +07"
+  "rx_human": "61M",
+  "tx_human": "2.1M",
+  "neofetch": "admin1@67070065-missing-semester \n-------------------------------- \nOS: Ubuntu 24.04.3 LTS x86_64 \nHost: VMware Virtual Platform None \nKernel: 6.8.0-87-generic \nUptime: 4 hours, 32 mins \nPackages: 776 (dpkg) \nShell: bash 5.2.21 \nResolution: 1280x800 \nCPU: Intel i5-8279U (1) @ 2.400GHz \nGPU: 00:0f.0 VMware SVGA II Adapter \nMemory: 229MiB / 1919MiB ",
+  "last_updated": "2025-11-21 02:02:27 +07"
 }
