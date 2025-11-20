@@ -1,491 +1,367 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Monitor - Retro Style</title>
+    <title>KMITL Internet Authentication - Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root {
-            /* --- Retro Theme Colors --- */
-            --bg-main: #fcfcfc; 
-            --header-gradient-start: #d9d9d9;
-            --header-gradient-end: #a6a6a6;
-            --text-main: #000000;
-            --text-muted: #555555;
-            
-            --title-blue: #003366; 
-            --title-red: #cc0000;
-
-            --accent-color: #3366cc; 
-            --table-header-bg: #e0e0e0;
-            --border-color: #cccccc;
-        }
-
         body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-size: 14pt;
+            font-family: 'Kanit', sans-serif;
+            background-color: #333;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
         }
-
-        /* --- Header --- */
-        header {
-            background: linear-gradient(to bottom, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%);
-            border-bottom: 1px solid #808080;
-            padding: 0;
-            margin-bottom: 20px;
-            position: relative;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        .nav-top-right {
-             position: absolute;
-             top: 10px;
-             right: 30px;
-             color: #000;
-             font-size: 11pt;
-             font-weight: bold;
-             text-decoration: none;
+        .dot-active {
+            width: 1.5rem !important;
+            background-color: #2563eb !important;
         }
-
-        .header-inner {
-            /* ปรับให้กว้างเต็มจอ เพื่อให้คำว่า Learning ชิดซ้ายมากขึ้น */
-            width: 100%; 
-            margin: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 30px 40px 0 40px; /* เพิ่ม Padding ซ้ายขวา */
-            height: 80px;
-            box-sizing: border-box;
+        /* Scrollbar ขนาดเล็ก สวยงาม */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
         }
-
-        .site-title {
-            font-size: 32pt;
-            color: white;
-            font-weight: normal;
-            text-shadow: 1px 1px 2px #333;
-            margin-bottom: 15px;
-            font-family: Georgia, 'Times New Roman', serif;
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
         }
-
-        /* --- Navigation Tabs --- */
-        .nav-menu {
-            display: flex;
-            gap: 3px;
-            margin-bottom: -1px;
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3); /* ปรับสี Scrollbar เป็นสีขาวจางๆ ให้เข้ากับพื้นหลังมืด */
+            border-radius: 20px;
         }
-
-        .nav-item {
-            padding: 8px 25px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333;
-            font-size: 13pt;
-            background-color: #d0d0d0;
-            border: 1px solid #808080;
-            border-bottom: none;
-            border-radius: 3px 3px 0 0;
-        }
-
-        .nav-item.active {
-            background-color: var(--bg-main);
-            color: #000;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            position: relative;
-            top: -2px;
-            border-bottom: 2px solid var(--bg-main); 
-            z-index: 10;
-        }
-        
-        .nav-item:hover:not(.active) {
-            background-color: #e8e8e8;
-        }
-
-        /* --- Content --- */
-        .container {
-            width: 100%;
-            max-width: 1200px; /* ขยายความกว้างเนื้อหาให้สมดุลกับ Header */
-            margin: 0 auto;
-            padding: 20px 40px;
-            box-sizing: border-box;
-        }
-
-        .main-title {
-            color: var(--title-blue);
-            font-size: 24pt;
-            font-weight: bold;
-            margin-top: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .sub-desc {
-            font-size: 13pt;
-            line-height: 1.5;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-        }
-
-        /* --- Buttons --- */
-        .button-container {
-            margin: 20px 0 40px 0;
-        }
-        
-        .action-button {
-            display: inline-block;
-            background: linear-gradient(to bottom, #4a80e4 0%, #1e57b8 100%);
-            color: white;
-            padding: 5px 15px;
-            text-decoration: none;
-            font-size: 12pt;
-            font-weight: bold;
-            border: 2px solid #103c85;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        
-        .action-button:hover {
-            background: linear-gradient(to bottom, #3366cc 0%, #15408a 100%);
-        }
-        
-        .action-button.secondary {
-            background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
-            color: black;
-            border: 2px solid #999;
-        }
-        .action-button.secondary:hover {
-             background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
-        }
-
-        /* --- Data Blocks --- */
-        .grid-top {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px; /* เพิ่มช่องว่างระหว่าง Block */
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 30px;
-        }
-
-        .data-block {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .block-header {
-            font-size: 14pt;
-            color: var(--title-blue);
-            font-weight: bold;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--title-blue);
-            display: inline-block;
-        }
-
-        .block-value {
-            font-size: 22pt;
-            font-weight: bold;
-            color: #000;
-            float: right;
-        }
-        
-        .block-header::after { content: ""; display: table; clear: both; }
-
-        .sub-text {
-            font-size: 11pt;
-            color: var(--text-muted);
-            margin-top: 5px;
-            display: block;
-            font-style: italic;
-        }
-
-        .progress-bg {
-            background-color: #e0e0e0;
-            height: 12px;
-            margin-top: 15px;
-            border: 1px solid #999;
-        }
-
-        .progress-fill {
-            background-color: var(--accent-color);
-            height: 100%;
-        }
-
-        /* --- Gauge --- */
-        .gauge-wrapper {
-            position: relative;
-            width: 150px;
-            height: 75px;
-            margin: 20px auto 0;
-            overflow: hidden;
-        }
-
-        .gauge-arc {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-
-        .gauge-inner {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 110px;
-            height: 110px;
-            background-color: var(--bg-main);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            padding-top: 20px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-        }
-
-        .gauge-value {
-            font-size: 20pt;
-            font-weight: bold;
-            color: #000;
-        }
-
-        /* --- Table --- */
-        .section-header-red {
-            color: var(--title-red);
-            font-weight: bold;
-            font-size: 18pt;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            text-decoration: underline;
-        }
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 12pt;
-        }
-
-        th {
-            text-align: left;
-            font-weight: bold;
-            color: var(--title-blue);
-            background-color: var(--table-header-bg);
-            padding: 8px;
-            border: 1px solid #999;
-        }
-
-        td {
-            padding: 8px;
-            color: black;
-            border: 1px solid #ccc;
-            vertical-align: top;
-        }
-
-        tbody tr:hover td {
-            background-color: #ffffcc;
-        }
-
-        .cmd-tag {
-            font-family: "Courier New", Courier, monospace;
-            font-size: 11pt;
-            color: #333;
-        }
-        
-        .footer {
-            margin-top: 30px;
-            color: var(--text-muted);
-            font-size: 10pt;
-            text-align: right;
-            border-top: 1px dotted #ccc;
-            padding-top: 10px;
-            font-style: italic;
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
+<body class="h-screen w-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm overflow-hidden">
 
-<body>
+    <div class="w-full max-w-6xl p-4 flex flex-col lg:flex-row gap-6 items-stretch lg:h-[600px]">
 
-    <header>
-        <a href="#" class="nav-top-right">About me</a>
-        <div class="header-inner">
-            <div class="site-title">Learning</div>
-            <nav class="nav-menu">
-                <a href="#" class="nav-item active">DASHBOARD</a>
-                <a href="#" class="nav-item">SYSTEM</a>
-                <a href="#" class="nav-item">NETWORK</a>
-                <a href="#" class="nav-item">LOGS</a>
-                <a href="#" class="nav-item">CONFIG</a>
-            </nav>
-        </div>
-    </header>
+        <div class="glass-panel rounded-[30px] p-6 flex-1 flex flex-col justify-between relative shadow-2xl overflow-hidden">
+            
+            <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-3 rounded-full shadow hover:bg-white transition z-20 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="fa-solid fa-chevron-left text-gray-600"></i>
+            </button>
+            
+            <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-3 rounded-full shadow hover:bg-white transition z-20 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="fa-solid fa-chevron-right text-gray-600"></i>
+            </button>
 
-    <div class="container">
+            <div class="flex-1 overflow-hidden relative w-full">
+                <div id="carouselTrack" class="flex h-full transition-transform duration-500 ease-in-out w-full">
+                    
+                    <div class="min-w-full h-full p-8 grid grid-cols-1 md:grid-cols-3 gap-4 content-center">
+                        
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/ijudge.Kc5BjoCp.avif" alt="iJudge">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/90 w-10 h-10 rounded-lg flex items-center justify-center shadow text-red-500 text-lg font-bold backdrop-blur-sm">&lt;i&gt;</div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">&lt;i&gt;Judge</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE: 12% <br>
+                                        MEMORY: 4GB <br>
+                                        STATUS: ONLINE <br>
+                                        UPDATED: NOW
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-        <h1 class="main-title">System Status Dashboard</h1>
-        
-        <div class="sub-desc">
-            <b>Server Performance Monitoring System</b><br>
-            Real-time dashboard for tracking server health, resource usage, and active processes. 
-            This system provides critical data on CPU load, Memory consumption (RAM), and Disk storage availability 
-            to ensure system stability and performance efficiency.
-        </div>
-        
-        <div class="button-container">
-            <a href="https://www.youtube.com/watch?v=LVsTfx9FIUY" target="_blank" class="action-button">
-                Youtube Channel
-            </a>
-             <a href="#" class="action-button secondary">
-                Download Logs
-            </a>
-	    <a href="./67070065/67070065.html" class="btn">
-		Nine'szaza
-	    </a>
-        </div>
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover object-top transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/ejudge.DbkKKBdh.png" alt="eJudge">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/90 w-10 h-10 rounded-lg flex items-center justify-center shadow text-blue-600 text-lg backdrop-blur-sm"><i class="fa-solid fa-robot"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">&lt;e&gt;Judge</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="grid-top">
-            <div class="data-block">
-                <div>
-                    <span class="block-header">CPU Load</span>
-                    <span class="block-value">...</span>
-                </div>
-                <div class="progress-bg">
-                    <div class="progress-fill" style="width: 0%;"></div>
-                </div>
-                <span class="sub-text">Current processor usage</span>
-            </div>
+                        <a href="./67070134/67070134.html" class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group" target="_blank">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/dblearning.BHpSA2C1.avif" alt="DBLearn">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-database"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">DBLearn</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
 
-            <div class="data-block">
-                <div>
-                    <span class="block-header">Memory Usage</span>
-                    <span class="block-value">...</span>
-                </div>
-                 <span class="sub-text">Calculating...</span>
-                <div class="progress-bg">
-                    <div class="progress-fill" style="width: 0%;"></div>
-                </div>
-            </div>
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/onlearn.CUIxMQmS.avif" alt="Onlearn">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-table-cells-large"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">Onlearn</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="data-block">
-                <div>
-                    <span class="block-header">Disk Storage</span>
-                </div>
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/kmitlreg.BZgRu7mZ.avif" alt="Registrar">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-regular fa-pen-to-square"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">Registrar</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="gauge-wrapper">
-                    <div class="gauge-arc"></div>
-                    <div class="gauge-inner">
-                        <span class="gauge-value">...</span>
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/itcloud.1q6uEsTy.avif" alt="IT Cloud">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20"><i class="fa-solid fa-cloud"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">IT Cloud</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="min-w-full h-full p-8 grid grid-cols-1 md:grid-cols-3 gap-4 content-center">
+                         
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/jlearn.Cz8i5lZg.avif" alt="WiFi">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-mug-hot"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">J:Learn</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/statusit.4KyVEinA.avif" alt="Calendar">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-calendar-days"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">Calendar</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="opacity-0"></div>
+                        <div class="opacity-0"></div>
+                        <div class="opacity-0"></div>
+                        <div class="opacity-0"></div>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 5px;">
-                    <span class="sub-text">/dev/sda1 Capacity</span>
-                </div>
+            </div>
+
+            <div class="flex justify-center gap-2 mt-2 z-20">
+                <div id="dot-0" class="w-6 h-2 rounded-full bg-blue-600 transition-all duration-300 cursor-pointer" onclick="goToPage(0)"></div>
+                <div id="dot-1" class="w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 cursor-pointer" onclick="goToPage(1)"></div>
             </div>
         </div>
 
-        <div class="section-header-red">Active System Processes</div>
-        
-        <div class="table-container">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>PID</th>
-                        <th>User</th>
-                        <th>CPU%</th>
-                        <th>MEM%</th>
-                        <th>Command / Service</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="5" style="text-align:center; color: #555;">Loading process data...</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="footer">
-            System Status Updated: Waiting for data...
+        <div class="w-full lg:w-[350px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
+            <div class="text-center py-3 border-b text-xs text-gray-500 font-medium uppercase tracking-wide">ITKMITL Internet Authentication</div>
+            <div class="bg-gray-100 p-6 border-b">
+                <h1 class="text-lg text-gray-600">อรุณสวัสดิ์</h1>
+                <h2 id="userName" class="text-2xl font-bold text-gray-800 mt-1 leading-tight">...</h2>
+                <p id="userEmail" class="text-gray-500 text-sm mt-2">...</p>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">สถิติของคุณ</h3>
+                        <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded font-medium flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> Firewall</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-6 text-center text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i></div>
+                            <div><p class="text-sm font-bold text-gray-700">หมายเลข IP</p><p id="userIP" class="text-sm text-gray-600"></p></div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-6 text-center text-gray-500 mt-1"><i class="fa-solid fa-code-branch"></i></div>
+                            <div><p class="text-sm font-bold text-gray-700">เชื่อมต่อตั้งแต่</p><p id="connectedTime" class="text-sm text-gray-600"></p></div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-6 text-center text-gray-500 mt-1"><i class="fa-regular fa-clock"></i></div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-700">ระยะเวลาการเชื่อมต่อ</p>
+                                <p id="durationTime" class="text-sm text-gray-600">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 rounded-lg mt-4 transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ
+                    </button>
+                    <p class="text-center text-xs text-gray-400 mt-3 cursor-pointer hover:underline"><i class="fa-solid fa-user-lock"></i> จัดการรหัสผ่านรหัสผ่านของคุณ</p>
+                </div>
+            </div>
+            <div class="bg-yellow-400 py-3 px-4 text-center text-xs font-medium text-gray-800 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-bars-staggered"></i> การเชื่อมต่อทั้งหมดถูกตรวจสอบและบันทึกข้อมูล
+            </div>
         </div>
 
     </div>
 
     <script>
-        const DATA_URL = 'http://192.168.234.129/data.json'; 
-        
-        const CHART_COLOR_ACCENT = '#3366cc';
-        const CHART_COLOR_EMPTY = '#d0d0d0';
+        // ==============================
+        // ส่วนที่ 1: สุ่มรูปภาพพื้นหลัง
+        // ==============================
+        const backgroundImages = [
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/7.Hdcq2h5l.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/8.BvUjz9ck.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/3.ClxjTSR_.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/5.A1hoAjPi.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/1.BfFWuF2N.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/6.Dc1xT24Z.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/2.B4ftlZbF.avif"
+        ];
+        const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+        document.body.style.backgroundImage = `url('${randomImage}')`;
 
-        async function fetchData() {
-            try {
-                const response = await fetch(DATA_URL + '?t=' + new Date().getTime());
 
-                if (!response.ok) throw new Error('Connect failed');
+        // ==============================
+        // ส่วนที่ 2: สุ่มชื่อและรหัสนักศึกษา
+        // ==============================
+        const students = [
+            { id: "67070001", name: "กฤตภัทร แจ่มวัฏกูล" },
+            { id: "67070041", name: "ฐานพัชร์ ทิพย์เที่ยงแท้" },
+            { id: "67070044", name: "ฐิติวุฒน์ ครุฑชื่น" },
+            { id: "67070106", name: "พชรณัฐกร อนันต์" },
+            { id: "67070065", name: "ธนบดี อังกุลดี" },
+            { id: "67070277", name: "วรภา พุ่มฉัตร" },
+            { id: "67070134", name: "ภาสกร เติมทองดี" },
+            { id: "67070121", name: "พีรพัฒน์ สอนพงษ์" }
+        ];
 
-                const data = await response.json();
+        // สุ่มเลือก 1 คน
+        const randomStudent = students[Math.floor(Math.random() * students.length)];
 
-                // [CPU]
-                document.querySelector('.data-block:nth-child(1) .block-value').innerText = Math.round(data.cpu) + "%";
-                document.querySelector('.data-block:nth-child(1) .progress-fill').style.width = data.cpu + "%";
+        // แสดงผล
+        document.getElementById('userName').innerText = randomStudent.name;
+        document.getElementById('userEmail').innerText = `it${randomStudent.id}@it.kmitl.ac.th`;
 
-                // [Memory]
-                document.querySelector('.data-block:nth-child(2) .block-value').innerText = data.mem_percent + "%";
-                document.querySelector('.data-block:nth-child(2) .sub-text').innerText = data.mem_text;
-                document.querySelector('.data-block:nth-child(2) .progress-fill').style.width = data.mem_percent + "%";
 
-                // [Storage]
-                document.querySelector('.gauge-value').innerText = data.disk_percent + "%";
-                document.querySelector('.data-block:nth-child(3) .sub-text').innerText = data.disk_text + " Used";
+        // ==============================
+        // ส่วนที่ 3: ควบคุมการเลื่อนหน้า (Carousel)
+        // ==============================
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const totalPages = 2; 
+        let currentPage = 0; 
 
-                const percent = data.disk_percent;
-                document.querySelector('.gauge-arc').style.background =
-                    `conic-gradient(
-                        from 270deg, 
-                        ${CHART_COLOR_ACCENT} 0%, 
-                        ${CHART_COLOR_ACCENT} ${percent}%, 
-                        ${CHART_COLOR_EMPTY} ${percent}%, 
-                        ${CHART_COLOR_EMPTY} 180deg, 
-                        transparent 180deg
-                    )`;
+        function updateCarousel() {
+            const translateX = -(currentPage * 100);
+            track.style.transform = `translateX(${translateX}%)`;
 
-                // [Table]
-                const tableBody = document.querySelector('tbody');
-                tableBody.innerHTML = ""; 
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === totalPages - 1;
+            
+            prevBtn.style.opacity = currentPage === 0 ? '0.3' : '1';
+            nextBtn.style.opacity = currentPage === totalPages - 1 ? '0.3' : '1';
 
-                data.processes.forEach((proc) => {
-                    const row = `
-                        <tr>
-                            <td align="center">${proc.pid}</td>
-                            <td>${proc.user}</td>
-                            <td align="center">${proc.cpu}</td>
-                            <td align="center">${proc.mem}</td>
-                            <td><span class="cmd-tag">${proc.cmd}</span></td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
-                });
-
-                document.querySelector('.footer').innerText = "Last updated: " + data.last_update;
-
-            } catch (error) {
-                console.error('Error:', error);
-                document.querySelector('.footer').innerText = "Error connecting to data source.";
-                document.querySelector('.footer').style.color = 'red'; 
-            }
+            document.getElementById('dot-0').className = currentPage === 0 
+                ? "w-6 h-2 rounded-full bg-blue-600 transition-all duration-300 cursor-pointer" 
+                : "w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 cursor-pointer";
+                
+            document.getElementById('dot-1').className = currentPage === 1 
+                ? "w-6 h-2 rounded-full bg-blue-600 transition-all duration-300 cursor-pointer" 
+                : "w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 cursor-pointer";
         }
 
-        setInterval(fetchData, 600000);
-        fetchData();
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updateCarousel();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updateCarousel();
+            }
+        });
+
+        function goToPage(pageIndex) {
+            currentPage = pageIndex;
+            updateCarousel();
+        }
+
+        updateCarousel();
+
+        const randomLastOctet = Math.floor(Math.random() * (95 - 93 + 1)) + 93; 
+        document.getElementById('userIP').innerText = `10.110.192.${randomLastOctet} (Wireless)`;
+
+        const startTime = new Date();
+        const hours = String(startTime.getHours()).padStart(2, '0');
+        const minutes = String(startTime.getMinutes()).padStart(2, '0');
+        const seconds = String(startTime.getSeconds()).padStart(2, '0');
+        document.getElementById('connectedTime').innerText = `21 พ.ย. 2568 ${hours}:${minutes}:${seconds}`;
+
+        // ฟังก์ชันนับเวลาเดินหน้า (Real-time Timer)
+        function updateDuration() {
+            const currentTime = new Date();
+            const diff = currentTime - startTime; // Difference in milliseconds
+
+            const diffSeconds = Math.floor(diff / 1000);
+            const h = Math.floor(diffSeconds / 3600);
+            const m = Math.floor((diffSeconds % 3600) / 60);
+            const s = diffSeconds % 60;
+
+            document.getElementById('durationTime').innerText = `${h} hours ${m} minutes ${s} seconds`;
+        }
+
+        // อัปเดตทันทีและตั้งเวลาให้รันทุกวินาที
+        updateDuration();
+        setInterval(updateDuration, 1000);
     </script>
+
 </body>
 </html>
