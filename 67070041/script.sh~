@@ -9,7 +9,7 @@ ip_addr=$(ip a | grep inet | head -n 3 | tail -n 1 | awk '{print $2}' | cut -d/ 
 core_number=$(nproc)
 
 # 2) Output HTML in current directory
-OUTPUT="/home/megabitsss/mss2025-project-template/67070041/index.html"
+OUTPUT="/home/megabitsss/mss2025-project-template/67070041/cave.html"
 
 cat <<EOF > "$OUTPUT"
 
