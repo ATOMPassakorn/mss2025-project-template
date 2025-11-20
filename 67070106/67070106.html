@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>e-Judge Server Monitor</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="600">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #ecf0f5; }
+        .wrapper { display: flex; height: 100vh; overflow: hidden; }
+        .main-sidebar { width: 230px; background-color: #222d32; color: #b8c7ce; flex-shrink: 0; display: flex; flex-direction: column; }
+        .sidebar-logo { background-color: #222d32; color: white; height: 50px; line-height: 50px; text-align: center; font-size: 20px; font-weight: bold; }
+        .user-panel { padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .user-image { width: 45px; height: 45px; border-radius: 50%; background: #fff; display: flex; justify-content: center; align-items: center; margin-right: 10px; color: #333; font-size: 20px;}
+        .user-info p { margin: 0 0 5px 0; font-weight: 600; color: white; }
+        .user-info span { font-size: 11px; color: #8aa4af; }
+        .user-info i { color: #3c763d; margin-right: 3px; } 
+        .sidebar-menu { list-style: none; padding: 0; margin: 20px 0; }
+        .sidebar-menu li.header { color: #4b646f; background: #1a2226; padding: 10px 25px 10px 15px; font-size: 12px; text-transform: uppercase; }
+        .sidebar-menu li a { padding: 12px 15px; display: block; color: #b8c7ce; text-decoration: none; border-left: 3px solid transparent; }
+        .sidebar-menu li a:hover { background: #1e282c; color: white; }
+        .sidebar-menu li a i { margin-right: 10px; width: 20px; }
+        .content-wrapper { flex: 1; overflow-y: auto; background-color: #ecf0f5; }
+        .content-header { padding: 15px; background: white; box-shadow: 0 1px 1px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .content-header h1 { margin: 0; font-size: 24px; color: #333; }
+        .content-header small { font-size: 15px; color: #777; font-weight: 300; margin-left: 10px; } 
+        .content { padding: 15px; }
+        .row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; }
+        .col-card { flex: 1; min-width: 220px; height: 120px; color: white; border-radius: 3px; position: relative; overflow: hidden; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+        .bg-cyan { background-color: #00c0ef; }
+        .bg-blue { background-color: #0073b7; }
+        .bg-orange { background-color: #f39c12; }
+        .bg-red { background-color: #dd4b39; }
+        .inner { padding: 10px 20px; z-index: 5; position: relative; }
+        .inner h3 { font-size: 38px; font-weight: bold; margin: 0; }
+        .inner p { font-size: 15px; margin: 5px 0 0 0; }
+        .chart-overlay { position: absolute; top: 10px; right: 10px; width: 70px; height: 70px; opacity: 0.8; }
+        .icon-overlay { position: absolute; top: 15px; right: 15px; font-size: 65px; color: rgba(0,0,0,0.15); }
+        .small-box-footer { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.1); text-align: center; padding: 3px 0; color: rgba(255,255,255,0.8); font-size: 12px; }
+        .box { background: white; border-top: 3px solid #d2d6de; box-shadow: 0 1px 1px rgba(0,0,0,0.1); border-radius: 3px; }
+        .box.box-success { border-top-color: #00a65a; }
+        .box-header { padding: 10px; border-bottom: 1px solid #f4f4f4; display: flex; align-items: center; }
+        .box-header i { margin-right: 10px; color: #666; }
+        .box-title { font-size: 18px; color: #333; font-weight: 400; } 
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border-bottom: 1px solid #f4f4f4; text-align: left; font-size: 14px; }
+        th { font-weight: bold; color: #333; }
+        tr:hover { background-color: #f9f9f9; }
+        .empty-row { text-align: center; padding: 20px; color: #777; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <aside class="main-sidebar">
+        <div class="sidebar-logo"><span><e></span>J3k</div>
+        <div class="user-panel">
+            <div class="user-image"><i class="fas fa-robot"></i></div>
+            <div class="user-info">
+                <p>67070106</p>
+                <span><i class="fas fa-circle"></i> Online</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="header">SYSTEM INFO</li>
+            <li><a href="#"><i class="fas fa-microchip"></i> <span>Linux 6.8.0-87-generic</span></a></li>
+            <li><a href="#"><i class="fas fa-clock"></i> <span>Up: up 3 hours, 30 minutes</span></a></li>
+            <li><a href="#"><i class="fas fa-history"></i> <span>Update: 20/11/2025 13:50:02</span></a></li>
+            <li class="header">NAVIGATION</li>
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+        </ul>
+    </aside>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <h1>Server Status <small>Control panel</small></h1>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-card bg-cyan">
+                    <div class="inner"><h3>1.6%</h3><p>CPU Usage</p></div>
+                    <div class="chart-overlay"><canvas id="cpuChart"></canvas></div>
+                    <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
+                </div>
+                <div class="col-card bg-blue">
+                    <div class="inner"><h3>12.72%</h3><p>RAM Usage</p></div>
+                    <div class="chart-overlay"><canvas id="ramChart"></canvas></div>
+                    <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
+                </div>
+                <div class="col-card bg-orange">
+                    <div class="inner"><h3>35%</h3><p>Storage</p></div>
+                    <div class="chart-overlay"><canvas id="diskChart"></canvas></div>
+                    <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
+                </div>
+                <div class="col-card bg-red">
+                    <div class="inner"><h3>215</h3><p>Processes</p></div>
+                    <div class="icon-overlay"><i class="fas fa-chart-line"></i></div>
+                    <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
+                </div>
+            </div>
+
+            <div class="box box-success">
+                <div class="box-header">
+                    <i class="fas fa-trophy"></i>
+                    <h3 class="box-title">Hall of Fame (Top Processes)</h3>
+                </div>
+                <div class="box-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>User</th>
+                                <th>Name</th>
+                                <th>CPU%</th>
+                                <th>MEM%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>704</td><td>root</td><td>vmtoolsd</td><td>0.2</td><td>0.2</td></tr>
+<tr><td>3809</td><td>root</td><td>kworker/0:2-cgr</td><td>0.2</td><td>0.0</td></tr>
+<tr><td>5133</td><td>root</td><td>kworker/1:3-eve</td><td>0.1</td><td>0.0</td></tr>
+<tr><td>4246</td><td>root</td><td>kworker/1:1-eve</td><td>0.1</td><td>0.0</td></tr>
+<tr><td>6308</td><td>root</td><td>kworker/0:0-eve</td><td>0.1</td><td>0.0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const commonOptions = { cutout: '65%', plugins: { legend: { display: false }, tooltip: { enabled: false } }, maintainAspectRatio: false, responsive: true };
+    const whiteConfig = { backgroundColor: ['#ffffff', 'rgba(255,255,255,0.3)'], borderWidth: 0 };
+
+    new Chart(document.getElementById('cpuChart'), { type: 'doughnut', data: { datasets: [{ data: [1.6, 98.4], ...whiteConfig }] }, options: commonOptions });
+    new Chart(document.getElementById('ramChart'), { type: 'doughnut', data: { datasets: [{ data: [492, 3376], ...whiteConfig }] }, options: commonOptions });
+    new Chart(document.getElementById('diskChart'), { type: 'doughnut', data: { datasets: [{ data: [6586, 12359], ...whiteConfig }] }, options: commonOptions });
+</script>
+
+</body>
+</html>
