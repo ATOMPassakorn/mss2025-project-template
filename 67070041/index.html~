@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christmas Dashboard</title>
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <h1>🎄 Here Is Your Dashboard! 🎅</h1>
+
+    <div class="grid">
+      <div class="card">
+        <h2>CPU Usage</h2>
+        <div class="value" id="cpu">--%</div>
+      </div>
+
+      <div class="card">
+        <h2>Memory Usage</h2>
+        <div class="value" id="memory">--%</div>
+      </div>
+
+      <div class="card">
+        <h2>Storage Usage</h2>
+        <div class="value" id="storage">--%</div>
+      </div>
+
+      <div class="card">
+        <h2>Last Update</h2>
+        <div class="value" id="update">--</div>
+      </div>
+    </div>
+
+    <div class="footer">Merry Christmas! 🎁✨</div>
+  </div>
+
+  <script>
+    // Example placeholders for dynamic update
+    document.getElementById('cpu').textContent = '32%';
+    document.getElementById('memory').textContent = '58%';
+    document.getElementById('storage').textContent = '74%';
+    document.getElementById('update').textContent = new Date().toLocaleString();
+  </script>
+</body>
+</html>
+
