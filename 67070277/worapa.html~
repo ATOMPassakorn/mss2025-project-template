@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Monitor</title>
+    <style>
+        :root {
+            --primary: #4897d4;
+            --primary-dark: #1f4e79;
+            --bg-light: #e8f3fc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            padding: 30px;
+            background: var(--bg-light);
+            color: #0f2a40;
+        }
+
+        h1 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.09);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .bar-bg {
+            background: #d8e6f3;
+            height: 22px;
+            border-radius: 11px;
+            overflow: hidden;
+            margin: 8px 0 18px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.4s ease-out;
+            border-radius: 11px;
+        }
+
+        /* เฉพาะสี */
+        #mem-bar { background: #3aaed8; }
+        #disk-bar { background: #1f4e79; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #c7d7e8;
+        }
+
+        tr:hover td {
+            background: #f0f8ff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Server Status</h1>
+    <p>Last Updated: <span id="time">-</span></p>
+
+    <div class="card">
+        <h3>CPU Usage: <span id="cpu-txt">0%</span></h3>
+        <div class="bar-bg"><div class="bar-fill" id="cpu-bar"></div></div>
+        
+        <h3>Memory Usage: <span id="mem-txt">0%</span></h3>
+        <div class="bar-bg"><div class="bar-fill" id="mem-bar"></div></div>
+
+        <h3>Disk Usage: <span id="disk-txt">0%</span></h3>
+        <div class="bar-bg"><div class="bar-fill" id="disk-bar"></div></div>
+    </div>
+
+    <div class="card">
+        <h3>Top Processes</h3>
+        <table>
+            <thead>
+                <tr><th>PID</th><th>User</th><th>CPU%</th><th>Command</th></tr>
+            </thead>
+            <tbody id="proc-list"></tbody>
+        </table>
+    </div>
+
+    <script>
+        // !!! เปลี่ยนเป็น IP server ของคุณ !!!
+        const SERVER_URL = "http://192.168.1.XXX/data.json";
+
+        async function update() {
+            try {
+                const res = await fetch(SERVER_URL + "?t=" + Date.now());
+                const data = await res.json();
+
+                document.getElementById('time').innerText = data.timestamp;
+
+                document.getElementById('cpu-txt').innerText = data.cpu + "%";
+                document.getElementById('cpu-bar').style.width = data.cpu + "%";
+
+                document.getElementById('mem-txt').innerText = data.memory + "%";
+                document.getElementById('mem-bar').style.width = data.memory + "%";
+
+                document.getElementById('disk-txt').innerText = data.disk + "%";
+                document.getElementById('disk-bar').style.width = data.disk + "%";
+
+                const tbody = document.getElementById('proc-list');
+                tbody.innerHTML = '';
+                data.processes.forEach(p => {
+                    tbody.innerHTML += `<tr>
+                        <td>${p.pid}</td>
+                        <td>${p.user}</td>
+                        <td>${p.cpu}</td>
+                        <td>${p.command.substring(0, 50)}</td>
+                    </tr>`;
+                });
+
+            } catch (e) {
+                console.log("Error:", e);
+            }
+        }
+
+        setInterval(update, 2000);
+        update();
+    </script>
+</body>
+</html>
+
