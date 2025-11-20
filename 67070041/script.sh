@@ -224,6 +224,10 @@ cat <<EOF > "$OUTPUT"
 
 EOF
 
+REPO_PATH="/home/megabitsss/mss2025-project-template/67070041"
+
+cd "$REPO_PATH" || exit 1
+
 COMMIT_DATE=$(date '+%Y-%m-%d %H:%M:%S')
 git add .
 git commit -m "Auto update ${COMMIT_DATE} - System Dashboard"

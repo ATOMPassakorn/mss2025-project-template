@@ -223,3 +223,8 @@ cat <<EOF > "$OUTPUT"
 </html>
 
 EOF
+
+COMMIT_DATE=$(date '+%Y-%m-%d %H:%M:%S')
+git add .
+git commit -m "Auto update ${COMMIT_DATE} - System Dashboard"
+git push
