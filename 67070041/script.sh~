@@ -20,7 +20,7 @@ cat <<EOF > "$OUTPUT"
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>System Performance Dashboard</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="cave.css"/>
 </head>
 <body>
   <div class="dashboard-container">
@@ -223,3 +223,8 @@ cat <<EOF > "$OUTPUT"
 </html>
 
 EOF
+
+COMMIT_DATE=$(date '+%Y-%m-%d %H:%M:%S')
+git add .
+git commit -m "Auto update ${COMMIT_DATE} - System Dashboard"
+git push
