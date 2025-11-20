@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>67070065-Monitoring</title>
+  <link rel="stylesheet" href="./components/styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Server Monitor Dashboard</h1>
+      <h2>Current Status & Location</h2>
+      <h3 id="lastUpdated"></h3>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="container">
+
+    <div class="card-grid">
+
+      <!-- CPU -->
+      <div class="card">
+        <h4>CPU Usage</h4>
+        <p class="value" id="cpu">--%</p>
+      </div>
+
+      <!-- Memory -->
+      <div class="card">
+        <h4>Memory Usage</h4>
+        <p class="value" id="memory">--%</p>
+      </div>
+
+      <!-- Disk -->
+      <div class="card">
+        <h4>Disk Usage</h4>
+        <p class="value" id="disk">--%</p>
+        <span class="sub" id="diskDetail"></span>
+      </div>
+
+    </div>
+
+    <!-- System info -->
+    <div class="card-wide">
+      <h4>System Info (neofetch)</h4>
+      <pre id="neofetch"></pre>
+    </div>
+
+    <!-- Location -->
+    <div class="card-wide">
+      <h4>Server Location</h4>
+      <p id="locationText"></p>
+
+      <div class="map-wrapper">
+        <img src="./world-map.png" alt="World Map" class="world-map">
+        <div id="server-marker" class="map-marker"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./script/script.js"></script>
+</body>
+</html>

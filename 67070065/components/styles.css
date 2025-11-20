@@ -1,0 +1,115 @@
+/* Google Font ที่คล้ายฟอนต์ในภาพ */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background: #f8f8f8;
+  color: #222;
+}
+
+/* Hero Header */
+.hero {
+  position: relative;
+  height: 260px;
+  background-image: url('https://lh3.googleusercontent.com/sitesv/AAzXCkeMVmCdHYzmqOdFjMakt-IIUpK1AvCXjqr-ZYyEuZpE0QEKBbKw4-WlD78rxnMeP6MLfWAIFfiCImliCYKeI57YHvNN8Ey6RY6GkQWldsDyjHAuQWdslqe7rUUchd09Z8UXMVvJz4lX9DOLVc3gDWciCCT0Enj3wXGm3owkMY15ONu-N4sCPb6Vjj0=w16383');   
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 36px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.hero-content h2 {
+  margin: 5px 0;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.hero-content h3 {
+  margin-top: 10px;
+  opacity: 0.85;
+  font-size: 14px;
+}
+
+/* Main Container */
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Card Groups */
+.card-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card, .card-wide {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: rgba(0,0,0,0.08) 0px 3px 10px;
+  margin-bottom: 20px;
+}
+
+.card h4, .card-wide h4 {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 32px;
+  margin: 15px 0 0 0;
+  font-weight: 600;
+  color: royalblue;
+}
+
+.sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Map */
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+.world-map {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: rgba(0,0,0,0.1) 0px 3px 10px;
+}
+
+.map-marker {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #22c55e;
+  border: 3px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.4);
+}
