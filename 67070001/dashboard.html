@@ -2,86 +2,262 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>System Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>System Status</title>
     <style>
-        body { font-family: 'Inter', sans-serif; padding: 20px; background: #f4f6f8; color: #333; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        /* Card Style */
-        .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { margin-top: 0; font-size: 1.2rem; color: #2c3e50; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 20px; }
+        /* --- GLOBAL RESET --- */
+        * {
+            box-sizing: border-box;
+        }
 
-        /* Neofetch Layout */
-        .neofetch-box { display: flex; gap: 30px; align-items: flex-start; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
-        .ascii-art { color: #e95420; font-weight: bold; white-space: pre; line-height: 1.2; } /* สีส้ม Ubuntu */
-        .sys-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-        .info-row { display: flex; }
-        .label { font-weight: bold; width: 120px; color: #e95420; }
-        .value { color: #555; }
+        body {
+            background-image: url('https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif');
+            background-repeat: repeat;
+            font-family: "Times New Roman", Times, serif;
+            color: #000;
+            
+            margin: 0; 
+            padding: 10px; 
+            overflow-x: hidden;
+        }
 
-        /* Grid Layout สำหรับ CPU/RAM/Disk */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .bar-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 10px; }
-        .bar-fill { height: 100%; transition: width 0.5s; }
+        .container {
+            width: 100%; 
+            max-width: 99%; 
+            margin: 0 auto;
+            border: none;
+            background: transparent;
+        }
+
+        /* --- หัวข้อ --- */
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+            word-wrap: break-word;
+        }
         
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
-        th { color: #888; text-transform: uppercase; font-size: 0.8rem; }
+        .big-s {
+            color: #d60000;
+            font-size: 5em;
+            font-weight: bold;
+            vertical-align: baseline; 
+            text-shadow: 2px 2px 0px #fff;
+            margin-right: -5px;
+        }
+
+        .rest-text {
+            color: #000;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            vertical-align: baseline;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        hr {
+            border: 0;
+            border-top: 2px solid #000;
+            margin: 20px 0;
+        }
+
+        h2 {
+            color: #000080;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        ul { 
+            list-style-type: none;
+            padding-left: 0; 
+            margin: 0;
+        }
+        
+        /* Flexbox จัดเรียงบรรทัด */
+        .resource-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            gap: 5px;
+        }
+
+        .label-col {
+            font-weight: bold;
+            width: 130px;
+            flex-shrink: 0;
+        }
+
+        /* !!! แก้ไขตรงนี้: ขยายความกว้างเป็น 70px !!! */
+        .val { 
+            font-family: "Courier New", monospace; 
+            font-weight: bold; 
+            color: #000080; 
+            width: 70px;  /* เพิ่มพื้นที่ให้ตัวเลข */
+            text-align: right;
+            flex-shrink: 0;
+            margin-right: 5px; /* เว้นระยะห่างจากหลอดนิดนึง */
+        }
+
+        .bar-box {
+            border: 1px solid #000;
+            background: #fff;
+            width: 200px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+        .bar-fill { height: 100%; background: #000080; }
+
+        /* --- ตาราง Responsive --- */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.9em; 
+            table-layout: fixed; 
+        }
+
+        th { 
+            text-align: left; 
+            border-bottom: 2px solid #808080; 
+            color: #000080; 
+            padding: 5px;
+            white-space: nowrap; 
+        }
+
+        td { 
+            border-bottom: 1px dotted #808080; 
+            padding: 4px 5px; 
+            font-family: "Courier New", monospace;
+            word-wrap: break-word; 
+            overflow-wrap: break-word;
+        }
+
+        /* ปรับสัดส่วนตาราง */
+        th:nth-child(1) { width: 10%; } /* PID */
+        th:nth-child(2) { width: 15%; } /* USER */
+        th:nth-child(3) { width: 10%; } /* CPU */
+        th:nth-child(4) { width: 10%; } /* MEM */
+        th:nth-child(5) { width: 55%; } /* COMMAND */
+
+        a { color: blue; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* --- FOOTER --- */
+        .footer-section {
+            margin-top: 40px;
+            font-size: 0.9em;
+            position: relative;
+        }
+        .instructor-header {
+            color: #000080;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .instructor-name {
+            color: #000080;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .address-block {
+            line-height: 1.4;
+        }
+        .copyright-line {
+            color: #cc0000;
+            margin-top: 15px;
+            font-size: 0.85em;
+        }
+        .mail-icon-container {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>System Status Dashboard</h1>
-    
-    <div class="card">
-        <h2>System Info</h2>
-        <div class="neofetch-box">
-            <div class="sys-info">
-                <div class="info-row"><span class="label">OS</span><span class="value" id="sys-os">Loading...</span></div>
-                <div class="info-row"><span class="label">Host</span><span class="value" id="sys-host">Loading...</span></div>
-                <div class="info-row"><span class="label">Kernel</span><span class="value" id="sys-kernel">Loading...</span></div>
-                <div class="info-row"><span class="label">Uptime</span><span class="value" id="sys-uptime">Loading...</span></div>
-                <div class="info-row"><span class="label">Packages</span><span class="value" id="sys-pkg">Loading...</span></div>
-                <div class="info-row"><span class="label">Shell</span><span class="value" id="sys-shell">Loading...</span></div>
-            </div>
+
+    <div class="title-container">
+        <span class="big-s">S</span><span class="rest-text">YSTEM STATUS</span>
+    </div>
+
+    <h2>General Info</h2>
+    <ul style="padding-left: 0;">
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">OS:</b> <span class="val" style="text-align:left; width:auto;" id="sys-os">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Hostname:</b> <span class="val" style="text-align:left; width:auto;" id="sys-host">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Kernel:</b> <span class="val" style="text-align:left; width:auto;" id="sys-kernel">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Uptime:</b> <span class="val" style="text-align:left; width:auto;" id="sys-uptime">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Packages:</b> <span class="val" style="text-align:left; width:auto;" id="sys-pkg">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Shell:</b> <span class="val" style="text-align:left; width:auto;" id="sys-shell">Loading...</span></li>
+    </ul>
+
+    <h2>Resource Evaluation</h2>
+    <ul>
+        <li class="resource-row">
+            <span class="label-col">CPU Usage:</span> 
+            <span class="val" id="cpu-txt">0%</span>
+            <div class="bar-box"><div class="bar-fill" id="cpu-bar"></div></div>
+            <span style="font-size:0.9em; color:#333; margin-left:10px;" id="cpu-detail"></span>
+        </li>
+
+        <li class="resource-row">
+            <span class="label-col">Memory Usage:</span>
+            <span class="val" id="mem-txt">0%</span>
+            <div class="bar-box"><div class="bar-fill" id="mem-bar" style="background:#800080;"></div></div>
+            <span style="font-size:0.9em; margin-left:10px;" id="mem-detail"></span>
+        </li>
+
+        <li class="resource-row">
+            <span class="label-col">Disk Storage:</span>
+            <span class="val" id="disk-txt">0%</span>
+            <div class="bar-box"><div class="bar-fill" id="disk-bar" style="background:#006400;"></div></div>
+            <span style="font-size:0.9em; margin-left:10px;" id="disk-detail"></span>
+        </li>
+    </ul>
+
+    <br>
+
+    <h2>Running Processes</h2>
+    <table>
+        <thead>
+            <tr><th>PID</th><th>USER</th><th>CPU</th><th>MEM</th><th>COMMAND</th></tr>
+        </thead>
+        <tbody id="proc-list"></tbody>
+    </table>
+
+    <br><br>
+    <hr>
+
+    <div class="footer-section">
+        <div class="instructor-header">INSTRUCTOR</div>
+        
+        <div class="address-block">
+            <a href="#" class="instructor-name">Krittapat Jamwattakul</a><br>
+            School of Information Technology<br>
+            King Mongkut's Institute of Technology Ladkrabang<br>
+            1 Chalongkrung Rd, Ladkrabang<br>
+            Bangkok 10520, THAILAND<br>
+            Email Address: <a href="mailto:admin@server.com">67070001@kmitl.ac.th</a>
+        </div>
+
+        <div class="copyright-line">
+            Copyright © 2025 Cave. All rights reserved. <span style="color:#000; font-size:0.9em;">(Last Updated: <span id="last-updated">-</span>)</span>
+        </div>
+
+        <div class="mail-icon-container">
+            <img src="https://www.it.kmitl.ac.th/~pattarachai/PIC/ICON/emailspin.gif" alt="Email Spin" style="width: 40px; height: auto;">
+            <div style="font-weight:bold; font-size:0.8em;">MAIL</div>
+            <a href="mailto:admin@server.com" style="font-size:0.7em; color:black; text-decoration:none;">67070001@kmitl.ac.th</a>
         </div>
     </div>
 
-    <div class="stats-grid">
-        <div class="card">
-            <div>CPU Usage <span style="float:right; font-weight:bold" id="cpu-txt">0%</span></div>
-            <div style="font-size:0.75rem; color:#888; margin-top:5px; height: 1.2em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" id="cpu-detail">-</div>
-            <div class="bar-bg"><div class="bar-fill" id="cpu-bar" style="background:#3498db; width:0%"></div></div>
-        </div>
-        <div class="card">
-            <div>Memory Usage <span style="float:right; font-weight:bold" id="mem-txt">0%</span></div>
-            <div style="font-size:0.8rem; color:#888; margin-top:5px;"><span id="mem-detail">- / -</span></div>
-            <div class="bar-bg"><div class="bar-fill" id="mem-bar" style="background:#2ecc71; width:0%"></div></div>
-        </div>
-        <div class="card">
-            <div>Disk Usage <span style="float:right; font-weight:bold" id="disk-txt">0%</span></div>
-            <div style="font-size:0.8rem; color:#888; margin-top:5px;"><span id="disk-detail">- / -</span></div>
-            <div class="bar-bg"><div class="bar-fill" id="disk-bar" style="background:#e74c3c; width:0%"></div></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>Top Processes</h2>
-        <table>
-            <thead><tr><th>PID</th><th>User</th><th>CPU%</th><th>MEM%</th><th>Command</th></tr></thead>
-            <tbody id="proc-list"></tbody>
-        </table>
-    </div>
-    
-    <div style="text-align:center; color:#999; font-size:0.8rem; margin-top:20px;">
-        Last updated: <span id="last-updated">-</span>
-    </div>
 </div>
 
 <script>
-    // !!! แก้ IP SERVER ตรงนี้ !!!
+    // !!! อย่าลืมเช็ค IP Server ของคุณ !!!
     const SERVER_URL = "http://192.168.239.129/data.json"; 
 
     async function update() {
@@ -89,7 +265,7 @@
             const res = await fetch(SERVER_URL + "?t=" + Date.now());
             const data = await res.json();
 
-            // --- อัปเดต System Info (Neofetch) ---
+            // System Info
             document.getElementById('sys-os').innerText = data.os;
             document.getElementById('sys-host').innerText = data.host;
             document.getElementById('sys-kernel').innerText = data.kernel;
@@ -97,20 +273,26 @@
             document.getElementById('sys-pkg').innerText = data.packages;
             document.getElementById('sys-shell').innerText = data.shell;
 
-            // --- อัปเดต Stats ---
-            document.getElementById('cpu-txt').innerText = data.cpu + "%";
-            document.getElementById('cpu-bar').style.width = data.cpu + "%";
-            document.getElementById('cpu-detail').innerText = data.cpu_model;
+            // CPU - แปลงเป็นทศนิยม 0-1 ตำแหน่ง
+            const cpuVal = parseFloat(data.cpu).toFixed(0);
+            document.getElementById('cpu-txt').innerText = cpuVal + "%";
+            document.getElementById('cpu-bar').style.width = cpuVal + "%";
+            // เช็คว่ามีชื่อรุ่น CPU ไหม ถ้าไม่มีให้เว้นว่างไว้
+            document.getElementById('cpu-detail').innerText = data.cpu_model ? data.cpu_model : "";
 
-            document.getElementById('mem-txt').innerText = data.memory + "%";
-            document.getElementById('mem-bar').style.width = data.memory + "%";
-            document.getElementById('mem-detail').innerText = `${data.mem_used_gb}G / ${data.mem_total_gb}G`;
+            // Memory - แปลงเป็นทศนิยม 1 ตำแหน่ง (แก้ปัญหาเลขยาวเกิน)
+            const memVal = parseFloat(data.memory).toFixed(1); 
+            document.getElementById('mem-txt').innerText = memVal + "%";
+            document.getElementById('mem-bar').style.width = memVal + "%";
+            document.getElementById('mem-detail').innerText = `(${data.mem_used_gb}G / ${data.mem_total_gb}G)`;
 
-            document.getElementById('disk-txt').innerText = data.disk_percent + "%";
-            document.getElementById('disk-bar').style.width = data.disk_percent + "%";
-            document.getElementById('disk-detail').innerText = `${data.disk_used} / ${data.disk_total}`;
+            // Disk - แปลงเป็นทศนิยม 0 ตำแหน่ง
+            const diskVal = parseFloat(data.disk_percent).toFixed(0);
+            document.getElementById('disk-txt').innerText = diskVal + "%";
+            document.getElementById('disk-bar').style.width = diskVal + "%";
+            document.getElementById('disk-detail').innerText = `(${data.disk_used} / ${data.disk_total})`;
 
-            // --- อัปเดต Processes ---
+            // Processes
             const tbody = document.getElementById('proc-list');
             tbody.innerHTML = '';
             data.processes.forEach(p => {
@@ -119,15 +301,13 @@
                     <td>${p.user}</td>
                     <td>${p.cpu}</td>
                     <td>${p.mem}</td>
-                    <td style="word-break:break-all;">${p.command.substring(0, 60)}</td>
+                    <td>${p.command.substring(0, 80)}</td>
                 </tr>`;
             });
 
             document.getElementById('last-updated').innerText = data.timestamp;
 
-        } catch (e) {
-            console.log("Error:", e);
-        }
+        } catch (e) { console.log("Error:", e); }
     }
     setInterval(update, 2000);
     update();
