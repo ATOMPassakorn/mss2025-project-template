@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="refresh" content="5 ">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Performance Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header>
+      <div class="logo">
+        <span><i class="less-than">&lt;</i>i<i class="greater-than">&gt;</i></span>Jukks
+      </div>
+      <div class="subtitle">Online Dashboard System (Beta)</div>
+      <!-- New Greeting Element -->
+      <div id="greeting" class="greeting"></div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h2>CPU Usage</h2>
+        <div class="value" id="cpu">4.50%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h2>Memory Usage</h2>
+        <div class="value" id="memory">41.94%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💾</div>
+        <h2>Storage Usage</h2>
+        <div class="value" id="storage">56%</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⏰</div>
+        <h2>Last Update</h2>
+        <div class="value" id="update">21 November 2025 00:29:01</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📍</div>
+          <h2>IP Address</h2>
+          <div class="value" id="ip">192.168.229.128</div>
+        </div>
+              <div class="card">
+          <div class="card-icon">🌐</div>
+              <h2>Number of Cores</h2>
+              <div class="value" id="core">2</div>
+            </div>
+        </div>
+      </div>
+      </div>
+
+
+
+
+  </div>
+
+    <div class="footer">
+      <div class="footer-content">
+        Made with ❤️ by
+        <a href="https://www.it.kmitl.ac.th/~pattarachai/DiscreteMath/" target="_blank">
+          cd ./บัญชีเดอะมีน/ $ 20 ล้าน
+        </a>
+      </div>
+    </div>
+
+  <script>
+    // Expanded list of diverse and unique greetings (over 100 entries)
+    const greetings = [
+      "Hello", "Hola", "Bonjour", "Guten Tag", "Ciao", "Ahoj", "Marhaba", "Aloha",
+      
+      // East Asian (Korean, Japanese, Chinese)
+      "안녕하세요 (Annyeonghaseyo)", 
+      "こんにちは (Konnichiwa)", 
+      "你好 (Nǐ hǎo)", 
+      "早晨 (Jóu sàhn)", // Cantonese
+
+      // Indian / South Asian
+      "नमस्ते (Namaste)", // Hindi
+      "नमस्कार (Namaskar)", // Marathi
+      "வணக்கம் (Vanakkam)", // Tamil
+      "సలాం (Salām)", // Telugu
+
+      // Unique & Diverse Languages
+      "Sawubona", // Zulu
+      "Kia Ora", // Māori
+      "Jambo", // Swahili
+      "Saluton", // Esperanto (Constructed)
+      "Sut Mae", // Welsh
+      "Tere", // Estonian
+      "Përshëndetje", // Albanian
+      "Sannu", // Hausa
+      "Mhoro", // Shona
+      "Kamisaraki", // Aymara
+      "Yáʼátʼééh", // Navajo
+      "Mālō e lelei", // Tongan
+      "Ia Ora Na", // Tahitian
+      "Hau", // Lakota
+      "Cześć", // Polish (Informal)
+      "Shalom", // Hebrew
+      "A-hoy", // Scottish
+      "Zdravstvuyte", // Russian
+      "Terve", // Finnish
+      "God Kveld", // Norwegian
+      "Goeiedag", // Afrikaans
+      "G'day", // Australian English
+      "Dia Dhuit", // Irish Gaelic
+      "Labas", // Lithuanian
+      "Kaixo", // Basque
+      "Wilujeng", // Sundanese
+      "Sugeng", // Javanese
+      "Bula", // Fijian
+      "Tēnā koutou", // Māori (Plural)
+      "Xin Chào", // Vietnamese
+      "Sabaidee", // Lao
+      "Pryvit", // Ukrainian
+      "Barev", // Armenian
+      "Shlama", // Syriac/Aramaic
+      "Ahlan", // Arabic (Formal)
+      "Bok", // Croatian/Serbian
+      "Geia", // Greek
+      "Habari", // Swahili (General)
+      "Mirëdita", // Albanian (Formal)
+      "Heisann", // Norwegian (Casual)
+      "Oíche Mhaith", // Irish Gaelic (Good night)
+      "Selamat Pagi", // Indonesian/Malay (Good Morning)
+      "Aloha ʻoe", // Hawaiian (Farewell)
+      "Dzień Dobry", // Polish (Formal)
+      "Sawadee", // Thai
+      "Olá", // Portuguese
+      "Hæ", // Icelandic
+      "Hyvää päivää", // Finnish (Good day)
+      "Zdravo", // Bosnian/Macedonian
+      "Asalaam alaikum", // Arabic/Urdu (Greeting of peace)
+      "Ayubowan", // Sinhalese
+      "Bonġu", // Maltese
+      "Moni", // Chichewa
+      "Talofa", // Samoan
+      "Dobro jutro", // Slovene/Croatian (Good Morning)
+      "Sain uu", // Mongolian
+      "Salom", // Uzbek
+      "Selamat siang", // Indonesian/Malay (Good Afternoon)
+      "Goddag", // Danish/Swedish
+      "Hei", // Norwegian/Finnish
+      "Tere", // Estonian
+      "Nde-ewo", // Igbo
+      "Kedu", // Igbo
+      "Aluu", // Igbo
+      "Xamgbu", // Tibetan
+      "Yindi", // Yolngu Matha
+      "Zdrasti", // Bulgarian
+      "A gutn", // Yiddish
+      "Tungjatjeta", // Albanian (Long-life)
+      "Goian bego", // Basque (Rest in peace - as a unique historical greeting)
+      "Mata Hari", // Indonesian (Used loosely as greeting)
+      "Ave", // Latin
+      "Barka da zuwa", // Hausa (Welcome)
+      "Dumela", // Setswana
+      "Goedenavond", // Dutch (Good evening)
+      "Kamusta na", // Filipino
+      "Omae wa mou shindeiru", // Japanese (Meme greeting/phrase)
+      "Pryvitannie", // Belarusian
+      "Selam", // Turkish
+      "Sveiki", // Latvian
+      "Szia", // Hungarian
+      "Tach", // German (Regional)
+      "Yassas", // Greek (Informal)
+      "Zdravstvujte", // Russian (Formal)
+      "Dobar Dan", // Croatian
+      "Moin", // German (Northern)
+      "Labdien", // Latvian
+      "Shlemiel", // Yiddish (Unique term)
+      "Al-salam alaykum", // Arabic (Expanded form)
+      "Dobry den", // Czech
+      "Goeie more", // Afrikaans (Good morning)
+      "Tere tulemast", // Estonian (Welcome)
+      "Goeie dag", // Flemish/Dutch
+      "Ahooga", // Fictional/fun
+      "Hujambo", // Swahili (Singular)
+      "Ni sa bula", // Fijian
+      "Namaskar", // Nepali
+      "Ha det bra", // Norwegian (Goodbye - as a funny anti-greeting)
+      "Pura vida", // Costa Rican Spanish (Pure life)
+    ];
+
+    function setRandomGreeting() {
+      const randomIndex = Math.floor(Math.random() * greetings.length);
+      const greetingElement = document.getElementById('greeting');
+      if (greetingElement) {
+        // Set the text, using the accent color for fun
+        greetingElement.textContent = greetings[randomIndex] + '!';
+      }
+    }
+
+    // Run once on load to set the initial greeting
+    setRandomGreeting();
+
+    // The meta refresh tag will handle the subsequent updates every 10 seconds.
+  </script>
+</body>
+</html>
+
