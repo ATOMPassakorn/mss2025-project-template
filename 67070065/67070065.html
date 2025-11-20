@@ -41,7 +41,6 @@
   <script>
     async function loadStatus() {
       try {
-        // data.json อยู่โฟลเดอร์เดียวกับ html นี้
         const res = await fetch("data.json?cache=" + Date.now());
         const data = await res.json();
 
