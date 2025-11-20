@@ -10,3 +10,6 @@ SERVER_HOST="172.16.85.128"    # server ip
 
 ssh "${SERVER_USER}@${SERVER_HOST}" "/usr/local/bin/server_metrics.sh" > "$OUT_JSON"
 
+git add data.json
+git commit -m "Auto update server metrics at $(date)"
+git push
