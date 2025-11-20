@@ -1,41 +1,367 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubuntu Server Monitoring</title>
-    <!-- Import Google Font: Ubuntu -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Link to your stylesheet -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to Ubuntu Server Monitoring!</h1>
-        
-        <div class="button-container">
-            <!-- Button linking to student1's page -->
-            <a href="./student1/student1.html" class="btn">
-                Student 1's Server
-            </a>
-            
-            <!-- Button linking to student2's page -->
-            <a href="./student2/student2.html" class="btn">
-                Student 2's Server
-            </a>
-            
-            <!-- Button linking to student3's page -->
-            <a href="./student3/student3.html" class="btn">
-                Student 3's Server
-            </a>
+    <title>KMITL Internet Authentication - Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-            <!-- Button linking to student4's page -->
-            <a href="./student4/student4.html" class="btn">
-                Student 4's Server
-            </a>
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #333;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dot-active {
+            width: 1.5rem !important;
+            background-color: #2563eb !important;
+        }
+        /* Scrollbar ขนาดเล็ก สวยงาม */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3); /* ปรับสี Scrollbar เป็นสีขาวจางๆ ให้เข้ากับพื้นหลังมืด */
+            border-radius: 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body class="h-screen w-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm overflow-hidden">
+
+    <div class="w-full max-w-6xl p-4 flex flex-col lg:flex-row gap-6 items-stretch lg:h-[600px]">
+
+        <div class="glass-panel rounded-[30px] p-6 flex-1 flex flex-col justify-between relative shadow-2xl overflow-hidden">
+            
+            <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-3 rounded-full shadow hover:bg-white transition z-20 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="fa-solid fa-chevron-left text-gray-600"></i>
+            </button>
+            
+            <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-3 rounded-full shadow hover:bg-white transition z-20 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="fa-solid fa-chevron-right text-gray-600"></i>
+            </button>
+
+            <div class="flex-1 overflow-hidden relative w-full">
+                <div id="carouselTrack" class="flex h-full transition-transform duration-500 ease-in-out w-full">
+                    
+                    <div class="min-w-full h-full p-8 grid grid-cols-1 md:grid-cols-3 gap-4 content-center">
+                        
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/ijudge.Kc5BjoCp.avif" alt="iJudge">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/90 w-10 h-10 rounded-lg flex items-center justify-center shadow text-red-500 text-lg font-bold backdrop-blur-sm">&lt;i&gt;</div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">&lt;i&gt;Judge</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE: 12% <br>
+                                        MEMORY: 4GB <br>
+                                        STATUS: ONLINE <br>
+                                        UPDATED: NOW
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover object-top transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/ejudge.DbkKKBdh.png" alt="eJudge">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/90 w-10 h-10 rounded-lg flex items-center justify-center shadow text-blue-600 text-lg backdrop-blur-sm"><i class="fa-solid fa-robot"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">&lt;e&gt;Judge</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="./67070134/67070134.html" class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group" target="_blank">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/dblearning.BHpSA2C1.avif" alt="DBLearn">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-database"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">DBLearn</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/onlearn.CUIxMQmS.avif" alt="Onlearn">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-table-cells-large"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">Onlearn</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/kmitlreg.BZgRu7mZ.avif" alt="Registrar">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-regular fa-pen-to-square"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">Registrar</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/itcloud.1q6uEsTy.avif" alt="IT Cloud">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20"><i class="fa-solid fa-cloud"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">IT Cloud</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="min-w-full h-full p-8 grid grid-cols-1 md:grid-cols-3 gap-4 content-center">
+                         
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/jlearn.Cz8i5lZg.avif" alt="WiFi">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-mug-hot"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">J:Learn</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden h-44 shadow-lg cursor-pointer group">
+                            <img class="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-110 z-0" 
+                                 src="https://login.it.kmitl.ac.th/_app/immutable/assets/statusit.4KyVEinA.avif" alt="Calendar">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0 pointer-events-none"></div>
+                            <div class="relative z-10 p-4 flex flex-col justify-between h-full text-white">
+                                <div class="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center backdrop-blur-sm"><i class="fa-solid fa-calendar-days"></i></div>
+                                <div>
+                                    <h3 class="font-bold group-hover:-translate-y-1 transition-transform duration-300">Calendar</h3>
+                                    <p class="text-[10px] text-gray-300 mt-1 opacity-0 max-h-0 translate-y-4 group-hover:opacity-100 group-hover:max-h-[70px] group-hover:translate-y-0 group-hover:overflow-y-auto custom-scrollbar pr-1 transition-all duration-500 ease-out overflow-hidden leading-tight">
+                                        CPU USAGE <br>MEMORY USAGE <br>STORAGE USAGE <br>LAST TIME UPDATE <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="opacity-0"></div>
+                        <div class="opacity-0"></div>
+                        <div class="opacity-0"></div>
+                        <div class="opacity-0"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-2 mt-2 z-20">
+                <div id="dot-0" class="w-6 h-2 rounded-full bg-blue-600 transition-all duration-300 cursor-pointer" onclick="goToPage(0)"></div>
+                <div id="dot-1" class="w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 cursor-pointer" onclick="goToPage(1)"></div>
+            </div>
         </div>
+
+        <div class="w-full lg:w-[350px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
+            <div class="text-center py-3 border-b text-xs text-gray-500 font-medium uppercase tracking-wide">ITKMITL Internet Authentication</div>
+            <div class="bg-gray-100 p-6 border-b">
+                <h1 class="text-lg text-gray-600">อรุณสวัสดิ์</h1>
+                <h2 id="userName" class="text-2xl font-bold text-gray-800 mt-1 leading-tight">...</h2>
+                <p id="userEmail" class="text-gray-500 text-sm mt-2">...</p>
+            </div>
+            <div class="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">สถิติของคุณ</h3>
+                        <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded font-medium flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> Firewall</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-6 text-center text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i></div>
+                            <div><p class="text-sm font-bold text-gray-700">หมายเลข IP</p><p id="userIP" class="text-sm text-gray-600"></p></div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-6 text-center text-gray-500 mt-1"><i class="fa-solid fa-code-branch"></i></div>
+                            <div><p class="text-sm font-bold text-gray-700">เชื่อมต่อตั้งแต่</p><p id="connectedTime" class="text-sm text-gray-600"></p></div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-6 text-center text-gray-500 mt-1"><i class="fa-regular fa-clock"></i></div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-700">ระยะเวลาการเชื่อมต่อ</p>
+                                <p id="durationTime" class="text-sm text-gray-600">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 rounded-lg mt-4 transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ
+                    </button>
+                    <p class="text-center text-xs text-gray-400 mt-3 cursor-pointer hover:underline"><i class="fa-solid fa-user-lock"></i> จัดการรหัสผ่านรหัสผ่านของคุณ</p>
+                </div>
+            </div>
+            <div class="bg-yellow-400 py-3 px-4 text-center text-xs font-medium text-gray-800 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-bars-staggered"></i> การเชื่อมต่อทั้งหมดถูกตรวจสอบและบันทึกข้อมูล
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        // ==============================
+        // ส่วนที่ 1: สุ่มรูปภาพพื้นหลัง
+        // ==============================
+        const backgroundImages = [
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/7.Hdcq2h5l.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/8.BvUjz9ck.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/3.ClxjTSR_.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/5.A1hoAjPi.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/1.BfFWuF2N.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/6.Dc1xT24Z.avif",
+            "https://login.it.kmitl.ac.th/_app/immutable/assets/2.B4ftlZbF.avif"
+        ];
+        const randomImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+        document.body.style.backgroundImage = `url('${randomImage}')`;
+
+
+        // ==============================
+        // ส่วนที่ 2: สุ่มชื่อและรหัสนักศึกษา
+        // ==============================
+        const students = [
+            { id: "67070001", name: "กฤตภัทร แจ่มวัฏกูล" },
+            { id: "67070041", name: "ฐานพัชร์ ทิพย์เที่ยงแท้" },
+            { id: "67070044", name: "ฐิติวุฒน์ ครุฑชื่น" },
+            { id: "67070106", name: "พชรณัฐกร อนันต์" },
+            { id: "67070065", name: "ธนบดี อังกุลดี" },
+            { id: "67070277", name: "วรภา พุ่มฉัตร" },
+            { id: "67070134", name: "ภาสกร เติมทองดี" },
+            { id: "67070121", name: "พีรพัฒน์ สอนพงษ์" }
+        ];
+
+        // สุ่มเลือก 1 คน
+        const randomStudent = students[Math.floor(Math.random() * students.length)];
+
+        // แสดงผล
+        document.getElementById('userName').innerText = randomStudent.name;
+        document.getElementById('userEmail').innerText = `it${randomStudent.id}@it.kmitl.ac.th`;
+
+
+        // ==============================
+        // ส่วนที่ 3: ควบคุมการเลื่อนหน้า (Carousel)
+        // ==============================
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const totalPages = 2; 
+        let currentPage = 0; 
+
+        function updateCarousel() {
+            const translateX = -(currentPage * 100);
+            track.style.transform = `translateX(${translateX}%)`;
+
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === totalPages - 1;
+            
+            prevBtn.style.opacity = currentPage === 0 ? '0.3' : '1';
+            nextBtn.style.opacity = currentPage === totalPages - 1 ? '0.3' : '1';
+
+            document.getElementById('dot-0').className = currentPage === 0 
+                ? "w-6 h-2 rounded-full bg-blue-600 transition-all duration-300 cursor-pointer" 
+                : "w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 cursor-pointer";
+                
+            document.getElementById('dot-1').className = currentPage === 1 
+                ? "w-6 h-2 rounded-full bg-blue-600 transition-all duration-300 cursor-pointer" 
+                : "w-2 h-2 rounded-full bg-gray-400 transition-all duration-300 cursor-pointer";
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updateCarousel();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updateCarousel();
+            }
+        });
+
+        function goToPage(pageIndex) {
+            currentPage = pageIndex;
+            updateCarousel();
+        }
+
+        updateCarousel();
+
+        const randomLastOctet = Math.floor(Math.random() * (95 - 93 + 1)) + 93; 
+        document.getElementById('userIP').innerText = `10.110.192.${randomLastOctet} (Wireless)`;
+
+        const startTime = new Date();
+        const hours = String(startTime.getHours()).padStart(2, '0');
+        const minutes = String(startTime.getMinutes()).padStart(2, '0');
+        const seconds = String(startTime.getSeconds()).padStart(2, '0');
+        document.getElementById('connectedTime').innerText = `21 พ.ย. 2568 ${hours}:${minutes}:${seconds}`;
+
+        // ฟังก์ชันนับเวลาเดินหน้า (Real-time Timer)
+        function updateDuration() {
+            const currentTime = new Date();
+            const diff = currentTime - startTime; // Difference in milliseconds
+
+            const diffSeconds = Math.floor(diff / 1000);
+            const h = Math.floor(diffSeconds / 3600);
+            const m = Math.floor((diffSeconds % 3600) / 60);
+            const s = diffSeconds % 60;
+
+            document.getElementById('durationTime').innerText = `${h} hours ${m} minutes ${s} seconds`;
+        }
+
+        // อัปเดตทันทีและตั้งเวลาให้รันทุกวินาที
+        updateDuration();
+        setInterval(updateDuration, 1000);
+    </script>
+
 </body>
 </html>
