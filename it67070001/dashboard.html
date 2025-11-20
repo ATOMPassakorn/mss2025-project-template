@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; padding: 20px; background: #f4f6f8; color: #333; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        /* Card Style */
+        .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { margin-top: 0; font-size: 1.2rem; color: #2c3e50; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 20px; }
+
+        /* Neofetch Layout */
+        .neofetch-box { display: flex; gap: 30px; align-items: flex-start; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+        .ascii-art { color: #e95420; font-weight: bold; white-space: pre; line-height: 1.2; } /* สีส้ม Ubuntu */
+        .sys-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .info-row { display: flex; }
+        .label { font-weight: bold; width: 120px; color: #e95420; }
+        .value { color: #555; }
+
+        /* Grid Layout สำหรับ CPU/RAM/Disk */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .bar-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 10px; }
+        .bar-fill { height: 100%; transition: width 0.5s; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { color: #888; text-transform: uppercase; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>System Status Dashboard</h1>
+    
+    <div class="card">
+        <h2>System Info</h2>
+        <div class="neofetch-box">
+            <div class="sys-info">
+                <div class="info-row"><span class="label">OS</span><span class="value" id="sys-os">Loading...</span></div>
+                <div class="info-row"><span class="label">Host</span><span class="value" id="sys-host">Loading...</span></div>
+                <div class="info-row"><span class="label">Kernel</span><span class="value" id="sys-kernel">Loading...</span></div>
+                <div class="info-row"><span class="label">Uptime</span><span class="value" id="sys-uptime">Loading...</span></div>
+                <div class="info-row"><span class="label">Packages</span><span class="value" id="sys-pkg">Loading...</span></div>
+                <div class="info-row"><span class="label">Shell</span><span class="value" id="sys-shell">Loading...</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="card">
+            <div>CPU Usage <span style="float:right; font-weight:bold" id="cpu-txt">0%</span></div>
+            <div class="bar-bg"><div class="bar-fill" id="cpu-bar" style="background:#3498db; width:0%"></div></div>
+        </div>
+        <div class="card">
+            <div>Memory Usage <span style="float:right; font-weight:bold" id="mem-txt">0%</span></div>
+            <div class="bar-bg"><div class="bar-fill" id="mem-bar" style="background:#2ecc71; width:0%"></div></div>
+        </div>
+        <div class="card">
+            <div>Disk Usage <span style="float:right; font-weight:bold" id="disk-txt">0%</span></div>
+            <div style="font-size:0.8rem; color:#888; margin-top:5px;"><span id="disk-detail">- / -</span></div>
+            <div class="bar-bg"><div class="bar-fill" id="disk-bar" style="background:#e74c3c; width:0%"></div></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Top Processes</h2>
+        <table>
+            <thead><tr><th>PID</th><th>User</th><th>CPU%</th><th>MEM%</th><th>Command</th></tr></thead>
+            <tbody id="proc-list"></tbody>
+        </table>
+    </div>
+    
+    <div style="text-align:center; color:#999; font-size:0.8rem; margin-top:20px;">
+        Last updated: <span id="last-updated">-</span>
+    </div>
+</div>
+
+<script>
+    // !!! แก้ IP SERVER ตรงนี้ !!!
+    const SERVER_URL = "http://192.168.239.129/data.json"; 
+
+    async function update() {
+        try {
+            const res = await fetch(SERVER_URL + "?t=" + Date.now());
+            const data = await res.json();
+
+            // --- อัปเดต System Info (Neofetch) ---
+            document.getElementById('sys-os').innerText = data.os;
+            document.getElementById('sys-host').innerText = data.host;
+            document.getElementById('sys-kernel').innerText = data.kernel;
+            document.getElementById('sys-uptime').innerText = data.uptime;
+            document.getElementById('sys-pkg').innerText = data.packages;
+            document.getElementById('sys-shell').innerText = data.shell;
+
+            // --- อัปเดต Stats ---
+            document.getElementById('cpu-txt').innerText = data.cpu + "%";
+            document.getElementById('cpu-bar').style.width = data.cpu + "%";
+
+            document.getElementById('mem-txt').innerText = data.memory + "%";
+            document.getElementById('mem-bar').style.width = data.memory + "%";
+
+            document.getElementById('disk-txt').innerText = data.disk_percent + "%";
+            document.getElementById('disk-bar').style.width = data.disk_percent + "%";
+            document.getElementById('disk-detail').innerText = `${data.disk_used} / ${data.disk_total}`;
+
+            // --- อัปเดต Processes ---
+            const tbody = document.getElementById('proc-list');
+            tbody.innerHTML = '';
+            data.processes.forEach(p => {
+                tbody.innerHTML += `<tr>
+                    <td>${p.pid}</td>
+                    <td>${p.user}</td>
+                    <td>${p.cpu}</td>
+                    <td>${p.mem}</td>
+                    <td style="word-break:break-all;">${p.command.substring(0, 60)}</td>
+                </tr>`;
+            });
+
+            document.getElementById('last-updated').innerText = data.timestamp;
+
+        } catch (e) {
+            console.log("Error:", e);
+        }
+    }
+    setInterval(update, 2000);
+    update();
+</script>
+
+</body>
+</html>
