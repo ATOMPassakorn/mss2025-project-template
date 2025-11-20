@@ -1,16 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-REPO_DIR="/home/worapx/mss2025-project-template/67070277"
-BRANCH="wangcan"
+SERVER_USER="worapx"
+SERVER_IP="192.168.74.130"
+REMOTE_SCRIPT_PATH="/home/worapx/67070277.sh"
 
-cd "$REPO_DIR" || exit 1
+PROJECT_DIR="/home/worapx/mss2025-project-template/67070277"
+LOCAL_OUTPUT_FILE="$PROJECT_DIR/67070277.html"
 
-git checkout $BRANCH
-git pull origin $BRANCH
+ssh $SERVER_USER@$SERVER_IP "$REMOTE_SCRIPT_PATH" > $LOCAL_OUTPUT_FILE
 
-git add worapa.html
+cd "$PROJECT_DIR" || exit
 
-if ! git diff --cached --quiet; then
-    git commit -m "Auto Update at $(date '+%Y-%m-%d %H:%M:%S')"
-    git push origin $BRANCH
-fi
+git add .
+git commit -m "Auto update $(date '+%Y-%m-%d %H:%M:%S')"
+
+git push
