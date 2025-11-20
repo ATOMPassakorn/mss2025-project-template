@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J:Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #e65c00;
+            --primary-orange-hover: #cc5200;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-body: #f9f9f9;
+            --bg-white: #ffffff;
+            --border-color: #eeeeee;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+        }
+
+        /* --- Header --- */
+        .main-header {
+            background-color: var(--bg-white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .logo span { color: var(--primary-orange); }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary-orange); }
+        .login-btn {
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-logo span { color: var(--primary-orange); }
+        .hero-title {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 5px;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: white;
+            color: var(--text-dark);
+            border: 1px solid #ddd;
+        }
+
+
+        /* --- Dashboard Grid --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .update-info {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-white);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid transparent;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-orange);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #fff4e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .card-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--primary-orange);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* --- Content Styling --- */
+        .metric-item { margin-bottom: 15px; }
+        .metric-item h3 {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0 0 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar-bg {
+            background: #eee;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--primary-orange);
+            width: 0%;
+            transition: width 0.4s ease-out;
+            border-radius: 5px;
+        }
+
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-list li strong { color: var(--text-dark); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px;
+            background-color: #fff4e6;
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">J:<span>Monitor</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html">My Group</a>
+            <a href="index.html">Playground</a>
+            <a href="index.html">Projects</a>
+            <a href="index.html">Choose us</a>
+        </nav>
+        <a href="#" class="login-btn">LOGIN TO STAY</a>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-logo">J:<span>Monitor</span></div>
+        <h1 class="hero-title">System Status Monitor</h1>
+        <div>
+            <a href="#" class="btn btn-primary">เข้าสู่หน้านี้แหละ</a>
+            <a href="#" class="btn btn-outline">เรียนรู้(ไม่)เพิ่มเติมเกี่ยวกับ J:MONITOR</a>
+        </div>
+    </section>
+
+    <section class="container">
+        <p class="update-info">Last Updated: <span id="time" style="color: var(--primary-orange); font-weight: 500;">-</span></p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                </div>
+                <h3 class="card-title">Resource Usage</h3>
+                <div class="metric-item">
+                    <h3>CPU: <span id="cpu-txt">0%</span></h3>
+                    <div class="bar-bg"><div class="bar-fill" id="cpu-bar"></div></div>
+                </div>
+                <div class="metric-item">
+                    <h3>Memory: <span id="mem-txt">0%</span></h3>
+                    <div class="bar-bg"><div class="bar-fill" id="mem-bar"></div></div>
+                </div>
+                <div class="metric-item">
+                    <h3>Disk: <span id="disk-txt">0%</span></h3>
+                    <div class="bar-bg"><div class="bar-fill" id="disk-bar"></div></div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H9v-2h6v2zm5-4H4V8h16v6z"/></svg>
+                </div>
+                <h3 class="card-title">Network Details</h3>
+                <ul class="info-list">
+                    <li><strong>Hostname:</strong> <span id="hostname-txt">-</span></li>
+                    <li><strong>Local IP:</strong> <span id="localip-txt">-</span></li>
+                    <li><strong>Public IP:</strong> <span id="publicip-txt">-</span></li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                </div>
+                <h3 class="card-title">System Information</h3>
+                <ul class="info-list">
+                    <li><strong>OS/Kernel: </strong> <span id="os-txt">-</span>/<span id="kernel-txt">-</span></li>
+                    <li><strong>Uptime: </strong> <span id="uptime-txt">-</span></li>
+                    <li><strong>Processes: </strong> <span id="proc-count-txt">-</span></li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm8 16H5v-6h6v6zm0-8H5V5h6v6zm8 8h-6v-6h6v6zm0-8h-6V5h6v6z"/></svg>
+                </div>
+                <h3 class="card-title">Top Processes</h3>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr><th>PID</th><th>User</th><th>CPU%</th><th>CMD</th></tr>
+                        </thead>
+                        <tbody id="proc-list"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // !!! เปลี่ยนเป็น IP ของคุณ !!!
+        const SERVER_URL = "http://192.168.74.130/data.json";
+        async function update() {
+            try {
+                const res = await fetch(SERVER_URL + "?t=" + Date.now());
+                const data = await res.json();
+
+                // 1. แก้ชื่อตัวแปรให้ตรงกับ script.sh (ใช้พิมพ์เล็กทั้งหมด)
+                document.getElementById('time').innerText = data.timestamp;
+                document.getElementById('cpu-txt').innerText = data.cpu + "%";
+                document.getElementById('cpu-bar').style.width = data.cpu + "%";
+
+                document.getElementById('mem-txt').innerText = data.memory + "%";
+                document.getElementById('mem-bar').style.width = data.memory + "%";
+
+                document.getElementById('disk-txt').innerText = data.disk + "%";
+                document.getElementById('disk-bar').style.width = data.disk + "%";
+
+                // 2. System Details (ใช้ชื่อตัวแปรพิมพ์เล็ก ตาม script.sh ด้านบน)
+                document.getElementById('hostname-txt').innerText = data.hostname;
+                document.getElementById('os-txt').innerText = data.os;
+                document.getElementById('kernel-txt').innerText = data.kernel;
+                document.getElementById('localip-txt').innerText = data.local_ip;
+                document.getElementById('publicip-txt').innerText = data.public_ip;
+                document.getElementById('uptime-txt').innerText = data.uptime;
+                document.getElementById('proc-count-txt').innerText = data.proc_count;
+
+                // 3. Top Processes
+                const tbody = document.getElementById('proc-list');
+                tbody.innerHTML = '';
+                data.processes.forEach(p => {
+                    tbody.innerHTML += `<tr>
+                        <td>${p.pid}</td>
+                        <td>${p.user}</td>
+                        <td>${p.cpu}</td>
+                        <td>${p.command.substring(0, 25)}...</td>
+                    </tr>`;
+                });
+
+            } catch (e) {
+                console.log("Error:", e);
+                document.getElementById('time').innerText = "Error loading data";
+            }
+        }
+
+        setInterval(update, 2000);
+        update();
+    </script>
+</body>
+</html>
