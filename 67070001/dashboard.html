@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Status</title>
+    <style>
+        /* --- GLOBAL RESET --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('https://www.it.kmitl.ac.th/~pattarachai/PIC/BG/stone.gif');
+            background-repeat: repeat;
+            font-family: "Times New Roman", Times, serif;
+            color: #000;
+            
+            margin: 0; 
+            padding: 10px; 
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%; 
+            max-width: 99%; 
+            margin: 0 auto;
+            border: none;
+            background: transparent;
+        }
+
+        /* --- หัวข้อ --- */
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+            word-wrap: break-word;
+        }
+        
+        .big-s {
+            color: #d60000;
+            font-size: 5em;
+            font-weight: bold;
+            vertical-align: baseline; 
+            text-shadow: 2px 2px 0px #fff;
+            margin-right: -5px;
+        }
+
+        .rest-text {
+            color: #000;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            vertical-align: baseline;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        hr {
+            border: 0;
+            border-top: 2px solid #000;
+            margin: 20px 0;
+        }
+
+        h2 {
+            color: #000080;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        ul { 
+            list-style-type: none;
+            padding-left: 0; 
+            margin: 0;
+        }
+        
+        /* Flexbox จัดเรียงบรรทัด */
+        .resource-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            gap: 5px;
+        }
+
+        .label-col {
+            font-weight: bold;
+            width: 130px;
+            flex-shrink: 0;
+        }
+
+        /* !!! แก้ไขตรงนี้: ขยายความกว้างเป็น 70px !!! */
+        .val { 
+            font-family: "Courier New", monospace; 
+            font-weight: bold; 
+            color: #000080; 
+            width: 70px;  /* เพิ่มพื้นที่ให้ตัวเลข */
+            text-align: right;
+            flex-shrink: 0;
+            margin-right: 5px; /* เว้นระยะห่างจากหลอดนิดนึง */
+        }
+
+        .bar-box {
+            border: 1px solid #000;
+            background: #fff;
+            width: 200px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+        .bar-fill { height: 100%; background: #000080; }
+
+        /* --- ตาราง Responsive --- */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.9em; 
+            table-layout: fixed; 
+        }
+
+        th { 
+            text-align: left; 
+            border-bottom: 2px solid #808080; 
+            color: #000080; 
+            padding: 5px;
+            white-space: nowrap; 
+        }
+
+        td { 
+            border-bottom: 1px dotted #808080; 
+            padding: 4px 5px; 
+            font-family: "Courier New", monospace;
+            word-wrap: break-word; 
+            overflow-wrap: break-word;
+        }
+
+        /* ปรับสัดส่วนตาราง */
+        th:nth-child(1) { width: 10%; } /* PID */
+        th:nth-child(2) { width: 15%; } /* USER */
+        th:nth-child(3) { width: 10%; } /* CPU */
+        th:nth-child(4) { width: 10%; } /* MEM */
+        th:nth-child(5) { width: 55%; } /* COMMAND */
+
+        a { color: blue; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* --- FOOTER --- */
+        .footer-section {
+            margin-top: 40px;
+            font-size: 0.9em;
+            position: relative;
+        }
+        .instructor-header {
+            color: #000080;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .instructor-name {
+            color: #000080;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .address-block {
+            line-height: 1.4;
+        }
+        .copyright-line {
+            color: #cc0000;
+            margin-top: 15px;
+            font-size: 0.85em;
+        }
+        .mail-icon-container {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="title-container">
+        <span class="big-s">S</span><span class="rest-text">YSTEM STATUS</span>
+    </div>
+
+    <h2>General Info</h2>
+    <ul style="padding-left: 0;">
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">OS:</b> <span class="val" style="text-align:left; width:auto;" id="sys-os">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Hostname:</b> <span class="val" style="text-align:left; width:auto;" id="sys-host">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Kernel:</b> <span class="val" style="text-align:left; width:auto;" id="sys-kernel">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Uptime:</b> <span class="val" style="text-align:left; width:auto;" id="sys-uptime">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Packages:</b> <span class="val" style="text-align:left; width:auto;" id="sys-pkg">Loading...</span></li>
+        <li style="margin-bottom: 5px;"><b style="display:inline-block; width:130px;">Shell:</b> <span class="val" style="text-align:left; width:auto;" id="sys-shell">Loading...</span></li>
+    </ul>
+
+    <h2>Resource Evaluation</h2>
+    <ul>
+        <li class="resource-row">
+            <span class="label-col">CPU Usage:</span> 
+            <span class="val" id="cpu-txt">0%</span>
+            <div class="bar-box"><div class="bar-fill" id="cpu-bar"></div></div>
+            <span style="font-size:0.9em; color:#333; margin-left:10px;" id="cpu-detail"></span>
+        </li>
+
+        <li class="resource-row">
+            <span class="label-col">Memory Usage:</span>
+            <span class="val" id="mem-txt">0%</span>
+            <div class="bar-box"><div class="bar-fill" id="mem-bar" style="background:#800080;"></div></div>
+            <span style="font-size:0.9em; margin-left:10px;" id="mem-detail"></span>
+        </li>
+
+        <li class="resource-row">
+            <span class="label-col">Disk Storage:</span>
+            <span class="val" id="disk-txt">0%</span>
+            <div class="bar-box"><div class="bar-fill" id="disk-bar" style="background:#006400;"></div></div>
+            <span style="font-size:0.9em; margin-left:10px;" id="disk-detail"></span>
+        </li>
+    </ul>
+
+    <br>
+
+    <h2>Running Processes</h2>
+    <table>
+        <thead>
+            <tr><th>PID</th><th>USER</th><th>CPU</th><th>MEM</th><th>COMMAND</th></tr>
+        </thead>
+        <tbody id="proc-list"></tbody>
+    </table>
+
+    <br><br>
+    <hr>
+
+    <div class="footer-section">
+        <div class="instructor-header">INSTRUCTOR</div>
+        
+        <div class="address-block">
+            <a href="#" class="instructor-name">Krittapat Jamwattakul</a><br>
+            School of Information Technology<br>
+            King Mongkut's Institute of Technology Ladkrabang<br>
+            1 Chalongkrung Rd, Ladkrabang<br>
+            Bangkok 10520, THAILAND<br>
+            Email Address: <a href="mailto:admin@server.com">67070001@kmitl.ac.th</a>
+        </div>
+
+        <div class="copyright-line">
+            Copyright © 2025 Cave. All rights reserved. <span style="color:#000; font-size:0.9em;">(Last Updated: <span id="last-updated">-</span>)</span>
+        </div>
+
+        <div class="mail-icon-container">
+            <img src="https://www.it.kmitl.ac.th/~pattarachai/PIC/ICON/emailspin.gif" alt="Email Spin" style="width: 40px; height: auto;">
+            <div style="font-weight:bold; font-size:0.8em;">MAIL</div>
+            <a href="mailto:admin@server.com" style="font-size:0.7em; color:black; text-decoration:none;">67070001@kmitl.ac.th</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // !!! อย่าลืมเช็ค IP Server ของคุณ !!!
+    const SERVER_URL = "http://192.168.239.129/data.json"; 
+
+    async function update() {
+        try {
+            const res = await fetch(SERVER_URL + "?t=" + Date.now());
+            const data = await res.json();
+
+            // System Info
+            document.getElementById('sys-os').innerText = data.os;
+            document.getElementById('sys-host').innerText = data.host;
+            document.getElementById('sys-kernel').innerText = data.kernel;
+            document.getElementById('sys-uptime').innerText = data.uptime;
+            document.getElementById('sys-pkg').innerText = data.packages;
+            document.getElementById('sys-shell').innerText = data.shell;
+
+            // CPU - แปลงเป็นทศนิยม 0-1 ตำแหน่ง
+            const cpuVal = parseFloat(data.cpu).toFixed(0);
+            document.getElementById('cpu-txt').innerText = cpuVal + "%";
+            document.getElementById('cpu-bar').style.width = cpuVal + "%";
+            // เช็คว่ามีชื่อรุ่น CPU ไหม ถ้าไม่มีให้เว้นว่างไว้
+            document.getElementById('cpu-detail').innerText = data.cpu_model ? data.cpu_model : "";
+
+            // Memory - แปลงเป็นทศนิยม 1 ตำแหน่ง (แก้ปัญหาเลขยาวเกิน)
+            const memVal = parseFloat(data.memory).toFixed(1); 
+            document.getElementById('mem-txt').innerText = memVal + "%";
+            document.getElementById('mem-bar').style.width = memVal + "%";
+            document.getElementById('mem-detail').innerText = `(${data.mem_used_gb}G / ${data.mem_total_gb}G)`;
+
+            // Disk - แปลงเป็นทศนิยม 0 ตำแหน่ง
+            const diskVal = parseFloat(data.disk_percent).toFixed(0);
+            document.getElementById('disk-txt').innerText = diskVal + "%";
+            document.getElementById('disk-bar').style.width = diskVal + "%";
+            document.getElementById('disk-detail').innerText = `(${data.disk_used} / ${data.disk_total})`;
+
+            // Processes
+            const tbody = document.getElementById('proc-list');
+            tbody.innerHTML = '';
+            data.processes.forEach(p => {
+                tbody.innerHTML += `<tr>
+                    <td>${p.pid}</td>
+                    <td>${p.user}</td>
+                    <td>${p.cpu}</td>
+                    <td>${p.mem}</td>
+                    <td>${p.command.substring(0, 80)}</td>
+                </tr>`;
+            });
+
+            document.getElementById('last-updated').innerText = data.timestamp;
+
+        } catch (e) { console.log("Error:", e); }
+    }
+    setInterval(update, 2000);
+    update();
+</script>
+
+</body>
+</html>
