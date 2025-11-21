@@ -66,8 +66,8 @@
         <ul class="sidebar-menu">
             <li class="header">SYSTEM INFO</li>
             <li><a href="#"><i class="fas fa-microchip"></i> <span>Linux 6.8.0-87-generic</span></a></li>
-            <li><a href="#"><i class="fas fa-clock"></i> <span>Up: up 1 hour, 46 minutes</span></a></li>
-            <li><a href="#"><i class="fas fa-history"></i> <span>Update: 21/11/2025 10:50:02</span></a></li>
+            <li><a href="#"><i class="fas fa-clock"></i> <span>Up: up 2 hours, 6 minutes</span></a></li>
+            <li><a href="#"><i class="fas fa-history"></i> <span>Update: 21/11/2025 11:10:02</span></a></li>
             <li class="header">NAVIGATION</li>
             <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
         </ul>
@@ -81,12 +81,12 @@
         <div class="content">
             <div class="row">
                 <div class="col-card bg-cyan">
-                    <div class="inner"><h3>1.6%</h3><p>CPU Usage</p></div>
+                    <div class="inner"><h3>0.8%</h3><p>CPU Usage</p></div>
                     <div class="chart-overlay"><canvas id="cpuChart"></canvas></div>
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
                 <div class="col-card bg-blue">
-                    <div class="inner"><h3>12.85%</h3><p>RAM Usage</p></div>
+                    <div class="inner"><h3>12.95%</h3><p>RAM Usage</p></div>
                     <div class="chart-overlay"><canvas id="ramChart"></canvas></div>
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
@@ -96,7 +96,7 @@
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
                 <div class="col-card bg-red">
-                    <div class="inner"><h3>213</h3><p>Processes</p></div>
+                    <div class="inner"><h3>212</h3><p>Processes</p></div>
                     <div class="icon-overlay"><i class="fas fa-chart-line"></i></div>
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
@@ -119,10 +119,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>2686</td><td>root</td><td>sshd</td><td>0.7</td><td>0.2</td></tr>
+                            <tr><td>2930</td><td>root</td><td>sshd</td><td>0.8</td><td>0.2</td></tr>
 <tr><td>704</td><td>root</td><td>vmtoolsd</td><td>0.3</td><td>0.2</td></tr>
-<tr><td>2081</td><td>root</td><td>kworker/0:1-eve</td><td>0.1</td><td>0.0</td></tr>
-<tr><td>2432</td><td>root</td><td>kworker/1:0-eve</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>2798</td><td>root</td><td>kworker/1:2-eve</td><td>0.1</td><td>0.0</td></tr>
+<tr><td>2432</td><td>root</td><td>kworker/1:0-cgr</td><td>0.0</td><td>0.0</td></tr>
 <tr><td>1</td><td>root</td><td>systemd</td><td>0.0</td><td>0.3</td></tr>
                         </tbody>
                     </table>
@@ -136,8 +136,8 @@
     const commonOptions = { cutout: '65%', plugins: { legend: { display: false }, tooltip: { enabled: false } }, maintainAspectRatio: false, responsive: true };
     const whiteConfig = { backgroundColor: ['#ffffff', 'rgba(255,255,255,0.3)'], borderWidth: 0 };
 
-    new Chart(document.getElementById('cpuChart'), { type: 'doughnut', data: { datasets: [{ data: [1.6, 98.4], ...whiteConfig }] }, options: commonOptions });
-    new Chart(document.getElementById('ramChart'), { type: 'doughnut', data: { datasets: [{ data: [497, 3371], ...whiteConfig }] }, options: commonOptions });
+    new Chart(document.getElementById('cpuChart'), { type: 'doughnut', data: { datasets: [{ data: [0.8, 99.2], ...whiteConfig }] }, options: commonOptions });
+    new Chart(document.getElementById('ramChart'), { type: 'doughnut', data: { datasets: [{ data: [501, 3367], ...whiteConfig }] }, options: commonOptions });
     new Chart(document.getElementById('diskChart'), { type: 'doughnut', data: { datasets: [{ data: [6611, 12334], ...whiteConfig }] }, options: commonOptions });
 </script>
 
