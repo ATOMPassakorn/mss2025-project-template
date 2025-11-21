@@ -1,13 +1,13 @@
 {
-  "cpu_usage": "9.10",
-  "mem_usage": "13.06",
+  "cpu_usage": "4.50",
+  "mem_usage": "12.51",
   "disk_usage": "37%",
-  "disk_used": "6.7G",
+  "disk_used": "6.8G",
   "disk_total": "20G",
   "iface": "ens33",
-  "rx_human": "70M",
-  "tx_human": "5.9M",
-  "neofetch": "atom@passakorn-server \n--------------------- \nOS: Ubuntu 24.04.3 LTS x86_64 \nHost: VMware Virtual Platform None \nKernel: 6.8.0-87-generic \nUptime: 3 hours, 46 mins \nPackages: 775 (dpkg) \nShell: bash 5.2.21 \nResolution: 1280x800 \nCPU: Intel Ultra 5 125H (2) @ 2.995GHz \nGPU: 00:0f.0 VMware SVGA II Adapter \nMemory: 278MiB / 3868MiB ",
-  "top": "top - 13:55:02 up  3:46,  3 users,  load average: 0.02, 0.01, 0.00\nTasks: 215 total,   1 running, 214 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :   3868.0 total,   2702.7 free,    514.1 used,    892.1 buff/cache     \nMiB Swap:   3868.0 total,   3868.0 free,      0.0 used.   3354.0 avail Mem \n\n    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n      1 root      20   0   22520  13264   9296 S   0.0   0.3   0:04.54 systemd\n      2 root      20   0       0      0      0 S   0.0   0.0   0:00.02 kthreadd\n      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+\n      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n     10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n     11 root      20   0       0      0      0 I   0.0   0.0   0:00.14 kworker+\n     12 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n     13 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+\n     14 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+\n     15 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+",
-  "last_updated": "2025-11-20 13:55:02 UTC"
+  "rx_human": "11M",
+  "tx_human": "221K",
+  "neofetch": "atom@passakorn-server \n--------------------- \nOS: Ubuntu 24.04.3 LTS x86_64 \nHost: VMware Virtual Platform None \nKernel: 6.8.0-87-generic \nUptime: 17 mins \nPackages: 775 (dpkg) \nShell: bash 5.2.21 \nResolution: 1280x800 \nCPU: Intel Ultra 5 125H (2) @ 2.995GHz \nGPU: 00:0f.0 VMware SVGA II Adapter \nMemory: 271MiB / 3868MiB ",
+  "top": "top - 09:08:01 up 17 min,  3 users,  load average: 0.05, 0.04, 0.03\nTasks: 218 total,   1 running, 217 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :   3868.1 total,   2987.3 free,    499.1 used,    610.6 buff/cache     \nMiB Swap:   3868.0 total,   3868.0 free,      0.0 used.   3369.0 avail Mem \n\n    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n      1 root      20   0   22072  12900   9316 S   0.0   0.3   0:01.93 systemd\n      2 root      20   0       0      0      0 S   0.0   0.0   0:00.02 kthreadd\n      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+\n      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n      9 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n     11 root      20   0       0      0      0 I   0.0   0.0   0:00.02 kworker+\n     12 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n     13 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+\n     14 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+\n     15 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+",
+  "last_updated": "2025-11-21 09:08:01 +07"
 }

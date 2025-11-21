@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-escape_sed() {
-    # escape / \ & สำหรับ sed และ newline เป็น <br> หรือ &#10; ถ้าใช้ <pre> ก็ไม่ต้อง
-    printf '%s' "$1" | sed -e 's/[\\/&]/\\&/g'
-}
-
 # Paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/67070134_template.html"
@@ -28,19 +23,31 @@ TOP=$(jq -r '.top' "$OUT_JSON")
 RX=$(jq -r '.rx_human' "$OUT_JSON")
 TX=$(jq -r '.tx_human' "$OUT_JSON")
 
-# escape สำหรับ sed
-NEO_ESCAPED=$(escape_sed "$NEO")
-TOP_ESCAPED=$(escape_sed "$TOP")
+# ใช้ <pre> ใน HTML แสดงเนื้อหา multi-line
+NEO_HTML="<pre>$NEO</pre>"
+TOP_HTML="<pre>$TOP</pre>"
 
-# คัดลอก template → แทนค่า placeholder
+# คัดลอก template → HTML
 cp "$TEMPLATE" "$HTML"
 
-sed -i "s|{{CPU}}|$CPU|g" "$HTML"
-sed -i "s|{{MEM}}|$MEM|g" "$HTML"
-sed -i "s|{{DISK}}|$DISK|g" "$HTML"
-sed -i "s|{{TIME}}|$TIME|g" "$HTML"
-sed -i "s|{{NEOFETCH}}|$NEO_ESCAPED|g" "$HTML"
-sed -i "s|{{TOP}}|$TOP_ESCAPED|g" "$HTML"
-sed -i "s|{{RX}}|$RX|g" "$HTML"
-sed -i "s|{{TX}}|$TX|g" "$HTML"
+# แทนค่า placeholder ด้วย awk (ปลอดภัยต่อ newline และอักขระพิเศษ)
+awk -v cpu="$CPU" \
+    -v mem="$MEM" \
+    -v disk="$DISK" \
+    -v time="$TIME" \
+    -v neo="$NEO_HTML" \
+    -v top="$TOP_HTML" \
+    -v rx="$RX" \
+    -v tx="$TX" '
+{
+    gsub(/\{\{CPU\}\}/, cpu)
+    gsub(/\{\{MEM\}\}/, mem)
+    gsub(/\{\{DISK\}\}/, disk)
+    gsub(/\{\{TIME\}\}/, time)
+    gsub(/\{\{NEOFETCH\}\}/, neo)
+    gsub(/\{\{TOP\}\}/, top)
+    gsub(/\{\{RX\}\}/, rx)
+    gsub(/\{\{TX\}\}/, tx)
+    print
+}' "$HTML" > "$HTML.tmp" && mv "$HTML.tmp" "$HTML"
 

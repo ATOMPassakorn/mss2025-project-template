@@ -8,7 +8,7 @@ OUT_JSON="$SCRIPT_DIR/data.json"
 
 # Server info
 SERVER_USER="atom"
-SERVER_HOST="10.110.192.167"
+SERVER_HOST="10.110.192.96"
 
 # SSH เข้า server → สร้าง JSON
 ssh "${SERVER_USER}@${SERVER_HOST}" "/usr/local/bin/server_metrics.sh" > "$OUT_JSON"
