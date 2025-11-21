@@ -1,18 +1,18 @@
 {
-    "timestamp": "2025-11-21 09:55:06",
+    "timestamp": "2025-11-21 09:59:26",
     "os": "Ubuntu 24.04.3 LTS x86_64 ",
     "host": "VMware Virtual Platform None ",
     "kernel": "6.8.0-87-generic ",
-    "uptime": "9 hours, 30 mins ",
+    "uptime": "9 hours, 35 mins ",
     "packages": "777 (dpkg) ",
     "shell": "sh ",
     "cpu_model": "AMD Ryzen 5 8645HS w/ Radeon 760M Graphics (2) @ 4.292GHz ",
-    "cpu": 9,
+    "cpu": 23,
     "memory": 13.9,
-    "mem_used_gb": "0.52",
+    "mem_used_gb": "0.53",
     "mem_total_gb": "3.78",
     "disk_used": "6.6G",
     "disk_total": "20G",
     "disk_percent": 36,
-    "processes": [ {"pid":"1573504", "user":"krittap+", "cpu":"15.6", "mem":"0.1", "command":"top -b -n 1 -c -w 512 "}, {"pid":"1569334", "user":"root", "cpu":"3.1", "mem":"0.1", "command":"/bin/bash /home/krittapat/monitor.sh "}, {"pid":"1", "user":"root", "cpu":"0.0", "mem":"0.3", "command":"/sbin/init "}, {"pid":"2", "user":"root", "cpu":"0.0", "mem":"0.0", "command":"[kthreadd] "}, {"pid":"3", "user":"root", "cpu":"0.0", "mem":"0.0", "command":"[pool_workqueue_release] "}]
+    "processes": [ {"pid":"1587676", "user":"root", "cpu":"14.7", "mem":"0.1", "command":"top -b -n 1 -c -w 512 "}, {"pid":"17", "user":"root", "cpu":"3.0", "mem":"0.0", "command":"[rcu_preempt] "}, {"pid":"1585684", "user":"krittap+", "cpu":"3.0", "mem":"0.1", "command":"/bin/bash /home/krittapat/monitor.sh "}, {"pid":"1", "user":"root", "cpu":"0.0", "mem":"0.3", "command":"/sbin/init "}, {"pid":"2", "user":"root", "cpu":"0.0", "mem":"0.0", "command":"[kthreadd] "}]
 }
