@@ -1,18 +1,18 @@
 {
-    "timestamp": "2025-11-21 09:34:52",
+    "timestamp": "2025-11-21 09:45:04",
     "os": "Ubuntu 24.04.3 LTS x86_64 ",
     "host": "VMware Virtual Platform None ",
     "kernel": "6.8.0-87-generic ",
-    "uptime": "9 hours, 10 mins ",
+    "uptime": "9 hours, 20 mins ",
     "packages": "777 (dpkg) ",
     "shell": "sh ",
     "cpu_model": "AMD Ryzen 5 8645HS w/ Radeon 760M Graphics (2) @ 4.292GHz ",
-    "cpu": 17,
-    "memory": 13.9,
-    "mem_used_gb": "0.52",
+    "cpu": 6,
+    "memory": 14.1,
+    "mem_used_gb": "0.53",
     "mem_total_gb": "3.78",
     "disk_used": "6.6G",
     "disk_total": "20G",
     "disk_percent": 36,
-    "processes": [ {"pid":"1507058", "user":"krittap+", "cpu":"15.8", "mem":"0.1", "command":"top -b -n 1 -c -w 512 "}, {"pid":"1507041", "user":"root", "cpu":"10.6", "mem":"0.1", "command":"top -b -n 1 -c -w 512 "}, {"pid":"487", "user":"root", "cpu":"2.6", "mem":"0.7", "command":"/sbin/multipathd -d -s "}, {"pid":"1", "user":"root", "cpu":"0.0", "mem":"0.3", "command":"/sbin/init "}, {"pid":"2", "user":"root", "cpu":"0.0", "mem":"0.0", "command":"[kthreadd] "}]
+    "processes": [ {"pid":"1540836", "user":"krittap+", "cpu":"19.4", "mem":"0.1", "command":"top -b -n 1 -c -w 512 "}, {"pid":"1540840", "user":"root", "cpu":"19.4", "mem":"0.1", "command":"top -b -n 1 -c -w 512 "}, {"pid":"1", "user":"root", "cpu":"0.0", "mem":"0.3", "command":"/sbin/init "}, {"pid":"2", "user":"root", "cpu":"0.0", "mem":"0.0", "command":"[kthreadd] "}, {"pid":"3", "user":"root", "cpu":"0.0", "mem":"0.0", "command":"[pool_workqueue_release] "}]
 }
