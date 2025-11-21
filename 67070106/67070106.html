@@ -66,8 +66,8 @@
         <ul class="sidebar-menu">
             <li class="header">SYSTEM INFO</li>
             <li><a href="#"><i class="fas fa-microchip"></i> <span>Linux 6.8.0-87-generic</span></a></li>
-            <li><a href="#"><i class="fas fa-clock"></i> <span>Up: up 2 hours, 36 minutes</span></a></li>
-            <li><a href="#"><i class="fas fa-history"></i> <span>Update: 21/11/2025 11:40:02</span></a></li>
+            <li><a href="#"><i class="fas fa-clock"></i> <span>Up: up 2 hours, 46 minutes</span></a></li>
+            <li><a href="#"><i class="fas fa-history"></i> <span>Update: 21/11/2025 11:50:03</span></a></li>
             <li class="header">NAVIGATION</li>
             <li><a href="#"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
         </ul>
@@ -86,7 +86,7 @@
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
                 <div class="col-card bg-blue">
-                    <div class="inner"><h3>12.80%</h3><p>RAM Usage</p></div>
+                    <div class="inner"><h3>12.87%</h3><p>RAM Usage</p></div>
                     <div class="chart-overlay"><canvas id="ramChart"></canvas></div>
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
@@ -96,7 +96,7 @@
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
                 <div class="col-card bg-red">
-                    <div class="inner"><h3>213</h3><p>Processes</p></div>
+                    <div class="inner"><h3>212</h3><p>Processes</p></div>
                     <div class="icon-overlay"><i class="fas fa-chart-line"></i></div>
                     <div class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></div>
                 </div>
@@ -120,10 +120,10 @@
                         </thead>
                         <tbody>
                             <tr><td>704</td><td>root</td><td>vmtoolsd</td><td>0.2</td><td>0.2</td></tr>
-<tr><td>2798</td><td>root</td><td>kworker/1:2-eve</td><td>0.1</td><td>0.0</td></tr>
-<tr><td>2435</td><td>root</td><td>kworker/0:0-eve</td><td>0.0</td><td>0.0</td></tr>
-<tr><td>3282</td><td>root</td><td>kworker/u257:1-</td><td>0.0</td><td>0.0</td></tr>
-<tr><td>2432</td><td>root</td><td>kworker/1:0-cgr</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>2798</td><td>root</td><td>kworker/1:2-eve</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>2435</td><td>root</td><td>kworker/0:0-cgr</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>3387</td><td>root</td><td>kworker/u257:3-</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>483</td><td>root</td><td>multipathd</td><td>0.0</td><td>0.6</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -137,7 +137,7 @@
     const whiteConfig = { backgroundColor: ['#ffffff', 'rgba(255,255,255,0.3)'], borderWidth: 0 };
 
     new Chart(document.getElementById('cpuChart'), { type: 'doughnut', data: { datasets: [{ data: [1.6, 98.4], ...whiteConfig }] }, options: commonOptions });
-    new Chart(document.getElementById('ramChart'), { type: 'doughnut', data: { datasets: [{ data: [495, 3373], ...whiteConfig }] }, options: commonOptions });
+    new Chart(document.getElementById('ramChart'), { type: 'doughnut', data: { datasets: [{ data: [499, 3369], ...whiteConfig }] }, options: commonOptions });
     new Chart(document.getElementById('diskChart'), { type: 'doughnut', data: { datasets: [{ data: [6611, 12334], ...whiteConfig }] }, options: commonOptions });
 </script>
 
